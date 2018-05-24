@@ -327,7 +327,9 @@ Namespace SpreadsheetDocServerAPIPart2
             Dim matches = Regex.Matches(sourceCode, RegexRegionPattern, RegexOptions.Singleline)
 
             For Each match In matches
-                Dim lines() As String = match.ToString().Split(New String() { ControlChars.CrLf }, StringSplitOptions.None)
+                Dim matchString As String = match.ToString()
+                Dim splitter As String = If(matchString.IndexOf(Constants.vbCrLf) >= 0, Constants.vbCrLf, Constants.vbLf)
+                Dim lines() As String = match.ToString().Split(New String() { splitter }, StringSplitOptions.None)
 
                 If lines.Length <= 2 Then
                     Continue For
