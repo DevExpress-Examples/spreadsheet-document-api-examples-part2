@@ -1,3 +1,15 @@
+<!-- default file list -->
+*Files to look at*:
+
+* [AutoFilterActions.cs](./CS/SpreadsheetDocServerAPIPart2/CodeExamples/AutoFilterActions.cs) (VB: [AutoFilterActions.vb](./VB/SpreadsheetDocServerAPIPart2/CodeExamples/AutoFilterActions.vb))
+* [ExportActions.cs](./CS/SpreadsheetDocServerAPIPart2/CodeExamples/ExportActions.cs) (VB: [ExportActions.vb](./VB/SpreadsheetDocServerAPIPart2/CodeExamples/ExportActions.vb))
+* [GroupAndOutlineActions.cs](./CS/SpreadsheetDocServerAPIPart2/CodeExamples/GroupAndOutlineActions.cs) (VB: [GroupAndOutlineActions.vb](./VB/SpreadsheetDocServerAPIPart2/CodeExamples/GroupAndOutlineActions.vb))
+* [PictureActions.cs](./CS/SpreadsheetDocServerAPIPart2/CodeExamples/PictureActions.cs) (VB: [PictureActions.vb](./VB/SpreadsheetDocServerAPIPart2/CodeExamples/PictureActions.vb))
+* [ProtectionActions.cs](./CS/SpreadsheetDocServerAPIPart2/CodeExamples/ProtectionActions.cs) (VB: [ProtectionActions.vb](./VB/SpreadsheetDocServerAPIPart2/CodeExamples/ProtectionActions.vb))
+* [SearchActions.cs](./CS/SpreadsheetDocServerAPIPart2/CodeExamples/SearchActions.cs) (VB: [SearchActions.vb](./VB/SpreadsheetDocServerAPIPart2/CodeExamples/SearchActions.vb))
+* [SortActions.cs](./CS/SpreadsheetDocServerAPIPart2/CodeExamples/SortActions.cs) (VB: [SortActions.vb](./VB/SpreadsheetDocServerAPIPart2/CodeExamples/SortActions.vb))
+* [TableActions.cs](./CS/SpreadsheetDocServerAPIPart2/CodeExamples/TableActions.cs) (VB: [TableActions.vb](./VB/SpreadsheetDocServerAPIPart2/CodeExamples/TableActions.vb))
+<!-- default file list end -->
 # Spreadsheet Document API - Part 2
 
 
