@@ -17,4 +17,5 @@ This example demonstrates how to use the <a href="https://documentation.devexpre
 <p>- Insert, delete and modify pictures<br>- Add a hyperlink to a picture<br>- Create a table<br>- Apply a custom style to the table<br>- Protect a workbook<br>- Protect a worksheet<br>- Apply user-specific permissions to a range in a protected worksheet<br>- Sort a range in descending and ascending orders<br>- Sort by multiple columns<br>- Simple search<br>- Search with options <br>- Export to HTML<br>- Group and outline data<br>- Insert subtotals<br>- Filter data by a list of values<br>- Apply a number filter<br>- Apply a text filter <br>- Apply a dynamic filter<br>- Sort the filtered data<br><br>For more information, review the <a href="https://documentation.devexpress.com/OfficeFileAPI/12074/Spreadsheet-Document-API/Examples"><u>Examples</u></a> section in the documentation.<br><br>The<strong> Universal Subscription</strong> or an additional <strong>Office File API Subscription</strong> is required to use this example in production code. Please refer to the <a href="https://www.devexpress.com/Buy/NET/">DevExpress Subscription</a> page for pricing information.</p>
 <br/>
 
-
+See also:<br/>
+<a href="https://github.com/DevExpress-Examples/spreadsheet-document-api-examples-e4339">Spreadsheet Document API - Part 1</a>
