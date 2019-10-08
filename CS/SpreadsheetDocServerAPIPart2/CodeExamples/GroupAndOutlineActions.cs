@@ -78,7 +78,7 @@ namespace SpreadsheetDocServerAPIPart2
             Worksheet worksheet = workbook.Worksheets["Regional Sales"];
             workbook.Worksheets.ActiveWorksheet = worksheet;
 
-            Range dataRange = worksheet["B3:E23"];
+            CellRange dataRange = worksheet["B3:E23"];
             // Specify that subtotals should be calculated for the column "D". 
             List<int> subtotalColumnsList = new List<int>();
             subtotalColumnsList.Add(3);

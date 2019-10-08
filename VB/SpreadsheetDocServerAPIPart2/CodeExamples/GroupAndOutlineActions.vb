@@ -74,7 +74,7 @@ Namespace SpreadsheetDocServerAPIPart2
             Dim worksheet As Worksheet = workbook.Worksheets("Regional Sales")
             workbook.Worksheets.ActiveWorksheet = worksheet
 
-            Dim dataRange As Range = worksheet("B3:E23")
+            Dim dataRange As CellRange = worksheet("B3:E23")
             ' Specify that subtotals should be calculated for the column "D". 
             Dim subtotalColumnsList As New List(Of Integer)()
             subtotalColumnsList.Add(3)

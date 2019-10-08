@@ -19,11 +19,11 @@ namespace SpreadsheetDocServerAPIPart2
             worksheet.Cells["A7"].Value = "D Fox";
 
             // Sort the range in ascending order.
-            Range range = worksheet.Range["A2:A7"];
+            CellRange range = worksheet.Range["A2:A7"];
             worksheet.Sort(range);
 
             // Create a heading.
-            Range header = worksheet.Range["A1"];
+            CellRange header = worksheet.Range["A1"];
             header[0].Value = "Ascending order";
             header.ColumnWidthInCharacters = 30;
             header.Style = workbook.Styles["Heading 1"];
@@ -44,11 +44,11 @@ namespace SpreadsheetDocServerAPIPart2
             worksheet.Cells["A7"].Value = "D Fox";
 
             // Sort the range in descending order.
-            Range range = worksheet.Range["A2:A7"];
+            CellRange range = worksheet.Range["A2:A7"];
             worksheet.Sort(range, false);
 
             // Create a heading.
-            Range header = worksheet.Range["A1"];
+            CellRange header = worksheet.Range["A1"];
             header[0].Value = "Descending order";
             header.ColumnWidthInCharacters = 30;
             header.Style = workbook.Styles["Heading 1"];
@@ -63,7 +63,7 @@ namespace SpreadsheetDocServerAPIPart2
 
             // Sort by a column with the offset = 3 in the range being sorted.
             // Use ascending order.
-            Range range = worksheet.Range["A3:F22"];
+            CellRange range = worksheet.Range["A3:F22"];
             worksheet.Sort(range, 3);
 
             #endregion #SortBySpecifiedColumn
@@ -91,7 +91,7 @@ namespace SpreadsheetDocServerAPIPart2
             fields.Add(sortField2);
 
             // Sort the range by sorting fields.
-            Range range = worksheet.Range["A3:F22"];
+            CellRange range = worksheet.Range["A3:F22"];
             worksheet.Sort(range, fields);
 
             #endregion #SortByMultipleColumns

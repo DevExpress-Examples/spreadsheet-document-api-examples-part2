@@ -14,7 +14,7 @@ Namespace SpreadsheetDocServerAPIPart2
             workbook.Worksheets.ActiveWorksheet = worksheet
 
             ' Enable filtering for the specified cell range.
-            Dim range As Range = worksheet("B2:E23")
+            Dim range As CellRange = worksheet("B2:E23")
             worksheet.AutoFilter.Apply(range)
 '            #End Region ' #ApplyFilter
         End Sub
@@ -25,7 +25,7 @@ Namespace SpreadsheetDocServerAPIPart2
             workbook.Worksheets.ActiveWorksheet = worksheet
 
             ' Enable filtering for the specified cell range.
-            Dim range As Range = worksheet("B2:E23")
+            Dim range As CellRange = worksheet("B2:E23")
             worksheet.AutoFilter.Apply(range)
 
             ' Sort the data in descending order by the first column.
@@ -39,7 +39,7 @@ Namespace SpreadsheetDocServerAPIPart2
             workbook.Worksheets.ActiveWorksheet = worksheet
 
             ' Enable filtering for the specified cell range.
-            Dim range As Range = worksheet("B2:E23")
+            Dim range As CellRange = worksheet("B2:E23")
             worksheet.AutoFilter.Apply(range)
 
             ' Sort the data in descending order by the first and third columns.
@@ -56,7 +56,7 @@ Namespace SpreadsheetDocServerAPIPart2
             workbook.Worksheets.ActiveWorksheet = worksheet
 
             ' Enable filtering for the specified cell range.
-            Dim range As Range = worksheet("B2:E23")
+            Dim range As CellRange = worksheet("B2:E23")
             worksheet.AutoFilter.Apply(range)
 
             ' Filter values in the "Sales" column that are in a range from 5000$ to 8000$.
@@ -71,7 +71,7 @@ Namespace SpreadsheetDocServerAPIPart2
             workbook.Worksheets.ActiveWorksheet = worksheet
 
             ' Enable filtering for the specified cell range.
-            Dim range As Range = worksheet("B2:E23")
+            Dim range As CellRange = worksheet("B2:E23")
             worksheet.AutoFilter.Apply(range)
 
             ' Filter values in the "Product" column that contain "Gi" and include empty cells.
@@ -86,7 +86,7 @@ Namespace SpreadsheetDocServerAPIPart2
             workbook.Worksheets.ActiveWorksheet = worksheet
 
             ' Enable filtering for the specified cell range.
-            Dim range As Range = worksheet("B2:E23")
+            Dim range As CellRange = worksheet("B2:E23")
             worksheet.AutoFilter.Apply(range)
 
             ' Filter the data in the "Product" column by a specific value.
@@ -100,7 +100,7 @@ Namespace SpreadsheetDocServerAPIPart2
             workbook.Worksheets.ActiveWorksheet = worksheet
 
             ' Enable filtering for the specified cell range.
-            Dim range As Range = worksheet("B2:E23")
+            Dim range As CellRange = worksheet("B2:E23")
             worksheet.AutoFilter.Apply(range)
 
             ' Filter the data in the "Product" column by an array of values.
@@ -114,7 +114,7 @@ Namespace SpreadsheetDocServerAPIPart2
             workbook.Worksheets.ActiveWorksheet = worksheet
 
             ' Enable filtering for the specified cell range.
-            Dim range As Range = worksheet("B2:E23")
+            Dim range As CellRange = worksheet("B2:E23")
             worksheet.AutoFilter.Apply(range)
 
             ' Filter values in the "Reported Date" column to display dates that are between June 1, 2014 and February 1, 2015.
@@ -128,7 +128,7 @@ Namespace SpreadsheetDocServerAPIPart2
             workbook.Worksheets.ActiveWorksheet = worksheet
 
             ' Enable filtering for the specified cell range.
-            Dim range As Range = worksheet("B2:E23")
+            Dim range As CellRange = worksheet("B2:E23")
             worksheet.AutoFilter.Apply(range)
 
             ' Create date grouping item to filter January 2015 dates.
@@ -147,7 +147,7 @@ Namespace SpreadsheetDocServerAPIPart2
             workbook.Worksheets.ActiveWorksheet = worksheet
 
             ' Enable filtering for the specified cell range.
-            Dim range As Range = worksheet("B2:E23")
+            Dim range As CellRange = worksheet("B2:E23")
             worksheet.AutoFilter.Apply(range)
 
             ' Apply a filter to the "Sales" column to display the top ten values.
@@ -161,7 +161,7 @@ Namespace SpreadsheetDocServerAPIPart2
             workbook.Worksheets.ActiveWorksheet = worksheet
 
             ' Enable filtering for the specified cell range.
-            Dim range As Range = worksheet("B2:E23")
+            Dim range As CellRange = worksheet("B2:E23")
             worksheet.AutoFilter.Apply(range)
 
             ' Apply a dynamic filter to the "Sales" column to display only values that are above the average.
@@ -177,7 +177,7 @@ Namespace SpreadsheetDocServerAPIPart2
             workbook.Worksheets.ActiveWorksheet = worksheet
 
             ' Enable filtering for the specified cell range.
-            Dim range As Range = worksheet("B2:E23")
+            Dim range As CellRange = worksheet("B2:E23")
             worksheet.AutoFilter.Apply(range)
 
             ' Filter values in the "Sales" column that are greater than 5000$.
@@ -195,7 +195,7 @@ Namespace SpreadsheetDocServerAPIPart2
             workbook.Worksheets.ActiveWorksheet = worksheet
 
             ' Enable filtering for the specified cell range.
-            Dim range As Range = worksheet("B2:E23")
+            Dim range As CellRange = worksheet("B2:E23")
             worksheet.AutoFilter.Apply(range)
 
             ' Filter values in the "Sales" column that are greater than 5000$.
@@ -212,7 +212,7 @@ Namespace SpreadsheetDocServerAPIPart2
             workbook.Worksheets.ActiveWorksheet = worksheet
 
             ' Enable filtering for the specified cell range.
-            Dim range As Range = worksheet("B2:E23")
+            Dim range As CellRange = worksheet("B2:E23")
             worksheet.AutoFilter.Apply(range)
 
             ' Disable filtering for the entire worksheet.

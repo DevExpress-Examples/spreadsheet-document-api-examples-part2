@@ -20,11 +20,11 @@ Namespace SpreadsheetDocServerAPIPart2
             worksheet.Cells("A7").Value = "D Fox"
 
             ' Sort the range in ascending order.
-            Dim range As Range = worksheet.Range("A2:A7")
+            Dim range As CellRange = worksheet.Range("A2:A7")
             worksheet.Sort(range)
 
             ' Create a heading.
-            Dim header As Range = worksheet.Range("A1")
+            Dim header As CellRange = worksheet.Range("A1")
             header(0).Value = "Ascending order"
             header.ColumnWidthInCharacters = 30
             header.Style = workbook.Styles("Heading 1")
@@ -44,11 +44,11 @@ Namespace SpreadsheetDocServerAPIPart2
             worksheet.Cells("A7").Value = "D Fox"
 
             ' Sort the range in descending order.
-            Dim range As Range = worksheet.Range("A2:A7")
+            Dim range As CellRange = worksheet.Range("A2:A7")
             worksheet.Sort(range, False)
 
             ' Create a heading.
-            Dim header As Range = worksheet.Range("A1")
+            Dim header As CellRange = worksheet.Range("A1")
             header(0).Value = "Descending order"
             header.ColumnWidthInCharacters = 30
             header.Style = workbook.Styles("Heading 1")
@@ -62,7 +62,7 @@ Namespace SpreadsheetDocServerAPIPart2
 
             ' Sort by a column with the offset = 3 in the range being sorted.
             ' Use ascending order.
-            Dim range As Range = worksheet.Range("A3:F22")
+            Dim range As CellRange = worksheet.Range("A3:F22")
             worksheet.Sort(range, 3)
 
 '            #End Region ' #SortBySpecifiedColumn
@@ -89,7 +89,7 @@ Namespace SpreadsheetDocServerAPIPart2
             fields.Add(sortField2)
 
             ' Sort the range by sorting fields.
-            Dim range As Range = worksheet.Range("A3:F22")
+            Dim range As CellRange = worksheet.Range("A3:F22")
             worksheet.Sort(range, fields)
 
 '            #End Region ' #SortByMultipleColumns
