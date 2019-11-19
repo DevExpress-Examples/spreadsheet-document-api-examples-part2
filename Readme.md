@@ -19,3 +19,5 @@ This example demonstrates how to use the <a href="https://documentation.devexpre
 
 See also:<br/>
 <a href="https://github.com/DevExpress-Examples/spreadsheet-document-api-examples-e4339">Spreadsheet Document API - Part 1</a>
+
+<a href="https://github.com/DevExpress-Examples/spreadsheet-document-api-part-3">Spreadsheet Document API - Part 3</a>
