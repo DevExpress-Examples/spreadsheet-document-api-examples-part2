@@ -152,7 +152,7 @@ namespace SpreadsheetDocServerAPIPart2
                 return;
 
             string exampleCode = codeEditor.ShowExample(oldExample, newExample);
-            codeExampleNameLbl.Text = CodeExampleDemoUtils.ConvertStringToMoreHumanReadableForm(newExample.RegionName) + " example";
+            codeExampleNameLbl.Text = CodeExampleDemoUtils.ConvertStringToMoreHumanReadableForm(newExample.RegionName);
             CodeEvaluationEventArgs args = new CodeEvaluationEventArgs();
             InitializeCodeEvaluationEventArgs(args, newExample.RegionName);
             evaluator.ForceCompile(args);

@@ -11,13 +11,13 @@ namespace SpreadsheetDocServerAPIPart2
             Worksheet worksheet = workbook.Worksheets["Grouping"];
             workbook.Worksheets.ActiveWorksheet = worksheet;
 
-            // Group four rows starting from the third row and collapse the group.
+            // Group rows 3 through 6 and collapse the group.
             worksheet.Rows.Group(2, 5, true);
 
-            // Group four rows starting from the ninth row and expand the group.
+            // Group rows 9 through 12 and expand the group.
             worksheet.Rows.Group(8, 11, false);
 
-            // Create the outer group of rows by grouping rows 2 through 13. 
+            // Group rows 2 through 13 to create the outer group. 
             worksheet.Rows.Group(1, 12, false);
             #endregion #GroupRows
         }
@@ -28,7 +28,7 @@ namespace SpreadsheetDocServerAPIPart2
             Worksheet worksheet = workbook.Worksheets["Grouping"];
             workbook.Worksheets.ActiveWorksheet = worksheet;
 
-            // Group four columns starting from the third column "C" and expand the group.
+            // Group columns "C" through "F" and expand the group.
             worksheet.Columns.Group(2, 5, false);
             #endregion #GroupColumns
         }
@@ -39,13 +39,13 @@ namespace SpreadsheetDocServerAPIPart2
             Worksheet worksheet = workbook.Worksheets["Grouping and Outline"];
             workbook.Worksheets.ActiveWorksheet = worksheet;
 
-            // Ungroup four rows (from the third row to the sixth row) and display collapsed data.
+            // Ungroup rows 3 through 6 and display collapsed data.
             worksheet.Rows.UnGroup(2, 5, true);
 
-            // Ungroup four rows (from the ninth row to the twelfth row).
+            // Ungroup rows 9 through 12.
             worksheet.Rows.UnGroup(8, 11, false);
 
-            // Remove the outer group of rows.
+            // Remove the outer row group.
             worksheet.Rows.UnGroup(1, 12, false);
             #endregion #UngroupRows
         }
@@ -56,7 +56,7 @@ namespace SpreadsheetDocServerAPIPart2
             Worksheet worksheet = workbook.Worksheets["Grouping and Outline"];
             workbook.Worksheets.ActiveWorksheet = worksheet;
 
-            // Ungroup four columns (from the column "C" to the column "F").
+            // Ungroup columns "C" through "F".
             worksheet.Columns.UnGroup(2, 5, false);
             #endregion #UngroupColumns
         }
@@ -77,12 +77,13 @@ namespace SpreadsheetDocServerAPIPart2
             #region #Subtotal
             Worksheet worksheet = workbook.Worksheets["Regional Sales"];
             workbook.Worksheets.ActiveWorksheet = worksheet;
-
+            // Obtain the target cell range.
             CellRange dataRange = worksheet["B3:E23"];
-            // Specify that subtotals should be calculated for the column "D". 
+            // Calculate subtotals for column "D".
             List<int> subtotalColumnsList = new List<int>();
             subtotalColumnsList.Add(3);
-            // Insert subtotals by each change in the column "B" and calculate the SUM fuction for the related rows in the column "D".
+            // Insert subtotals by each change in column "B"
+            // and calculate the SUM fuction for the related rows in column "D".
             worksheet.Subtotal(dataRange, 1, subtotalColumnsList, 9, "Total");
             #endregion #Subtotal
         }

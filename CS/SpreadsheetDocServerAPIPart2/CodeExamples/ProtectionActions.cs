@@ -12,8 +12,7 @@ namespace SpreadsheetDocServerAPIPart2
             Worksheet worksheet = workbook.Worksheets["ProtectionSample"];
             workbook.Worksheets.ActiveWorksheet = worksheet;
 
-            // Protect workbook structure with the password (prevent users from adding or 
-            //deleting worksheets or displaying hidden worksheets).
+            // Protect workbook structure with a password.
             if (!workbook.IsProtected)
                 workbook.Protect("password", true, false);
             // Add a note.
@@ -27,7 +26,7 @@ namespace SpreadsheetDocServerAPIPart2
             Worksheet worksheet = workbook.Worksheets["ProtectionSample"];
             workbook.Worksheets.ActiveWorksheet = worksheet;
 
-            // Unprotect the workbook using a password.
+            // Unprotect the workbook.
             if (workbook.IsProtected)
                 workbook.Unprotect("password");
             // Add a note.
@@ -41,7 +40,7 @@ namespace SpreadsheetDocServerAPIPart2
             Worksheet worksheet = workbook.Worksheets["ProtectionSample"];
             workbook.Worksheets.ActiveWorksheet = worksheet;
 
-            // Protect the worksheet. Prevent end-users from changing worksheet elements.
+            // Protect the worksheet with a password.
             if (!worksheet.IsProtected)
                 worksheet.Protect("password", WorksheetProtectionPermissions.Default);
             // Add a note.
@@ -57,7 +56,7 @@ namespace SpreadsheetDocServerAPIPart2
             Worksheet worksheet = workbook.Worksheets["ProtectionSample"];
             workbook.Worksheets.ActiveWorksheet = worksheet;
 
-            // Remove worksheet protection using a password.
+            // Unprotect the worksheet.
             if (worksheet.IsProtected)
                 worksheet.Unprotect("password");
             // Add a note.
@@ -80,7 +79,7 @@ namespace SpreadsheetDocServerAPIPart2
             permission.Deny = false;
             protectedRange.SecurityDescriptor = protectedRange.CreateSecurityDescriptor(new EditRangePermission[] { permission });
             protectedRange.SetPassword("123");
-            // Protect a worksheet.
+            // Protect the worksheet with a password.
             if (!worksheet.IsProtected)
                 worksheet.Protect("password", WorksheetProtectionPermissions.Default);
             // Add a note.

@@ -12,7 +12,7 @@ namespace SpreadsheetDocServerAPIPart2
             Worksheet worksheet = workbook.Worksheets["Regional sales"];
             workbook.Worksheets.ActiveWorksheet = worksheet;
 
-            // Enable filtering for the specified cell range.
+            // Enable filtering for the "B2:E23" cell range.
             CellRange range = worksheet["B2:E23"];
             worksheet.AutoFilter.Apply(range);
             #endregion #ApplyFilter
@@ -24,11 +24,12 @@ namespace SpreadsheetDocServerAPIPart2
             Worksheet worksheet = workbook.Worksheets["Regional sales"];
             workbook.Worksheets.ActiveWorksheet = worksheet;
 
-            // Enable filtering for the specified cell range.
+            // Enable filtering for the "B2:E23" cell range.
             CellRange range = worksheet["B2:E23"];
             worksheet.AutoFilter.Apply(range);
 
-            // Sort the data in descending order by the first column.
+            // Sort data in the "B2:E23" range
+            // in descending order by column "A".
             worksheet.AutoFilter.SortState.Sort(0, true);
             #endregion #FilterAndSortBySingleColumn
         }
@@ -39,11 +40,12 @@ namespace SpreadsheetDocServerAPIPart2
             Worksheet worksheet = workbook.Worksheets["Regional sales"];
             workbook.Worksheets.ActiveWorksheet = worksheet;
 
-            // Enable filtering for the specified cell range.
+            // Enable filtering for the "B2:E23" cell range.
             CellRange range = worksheet["B2:E23"];
             worksheet.AutoFilter.Apply(range);
 
-            // Sort the data in descending order by the first and third columns.
+            // Sort data in the "B2:E23" range
+            // in descending order by columns "A" and "C".
             List<SortCondition> sortConditions = new List<SortCondition>();
             sortConditions.Add(new SortCondition(0, true));
             sortConditions.Add(new SortCondition(2, true));
@@ -57,7 +59,7 @@ namespace SpreadsheetDocServerAPIPart2
             Worksheet worksheet = workbook.Worksheets["Regional sales"];
             workbook.Worksheets.ActiveWorksheet = worksheet;
 
-            // Enable filtering for the specified cell range.
+            // Enable filtering for the "B2:E23" cell range.
             CellRange range = worksheet["B2:E23"];
             worksheet.AutoFilter.Apply(range);
 
@@ -73,7 +75,7 @@ namespace SpreadsheetDocServerAPIPart2
             Worksheet worksheet = workbook.Worksheets["Regional sales"];
             workbook.Worksheets.ActiveWorksheet = worksheet;
 
-            // Enable filtering for the specified cell range.
+            // Enable filtering for the "B2:E23" cell range.
             CellRange range = worksheet["B2:E23"];
             worksheet.AutoFilter.Apply(range);
 
@@ -89,11 +91,11 @@ namespace SpreadsheetDocServerAPIPart2
             Worksheet worksheet = workbook.Worksheets["Regional sales"];
             workbook.Worksheets.ActiveWorksheet = worksheet;
 
-            // Enable filtering for the specified cell range.
+            // Enable filtering for the "B2:E23" cell range.
             CellRange range = worksheet["B2:E23"];
             worksheet.AutoFilter.Apply(range);
 
-            // Filter the data in the "Product" column by a specific value.
+            // Filter data in the "Product" column by a specific value.
             worksheet.AutoFilter.Columns[1].ApplyFilterCriteria("Mozzarella di Giovanni");
             #endregion #FilterBySingleValue
         }
@@ -104,11 +106,11 @@ namespace SpreadsheetDocServerAPIPart2
             Worksheet worksheet = workbook.Worksheets["Regional sales"];
             workbook.Worksheets.ActiveWorksheet = worksheet;
 
-            // Enable filtering for the specified cell range.
+            // Enable filtering for the "B2:E23" cell range.
             CellRange range = worksheet["B2:E23"];
             worksheet.AutoFilter.Apply(range);
 
-            // Filter the data in the "Product" column by an array of values.
+            // Filter data in the "Product" column by an array of values.
             worksheet.AutoFilter.Columns[1].ApplyFilterCriteria(new CellValue[] { "Mozzarella di Giovanni", "Gorgonzola Telino" });
             #endregion #FilterByMultipleValues
         }
@@ -119,12 +121,15 @@ namespace SpreadsheetDocServerAPIPart2
             Worksheet worksheet = workbook.Worksheets["Regional sales"];
             workbook.Worksheets.ActiveWorksheet = worksheet;
 
-            // Enable filtering for the specified cell range.
+            // Enable filtering for the "B2:E23" cell range.
             CellRange range = worksheet["B2:E23"];
             worksheet.AutoFilter.Apply(range);
 
-            // Filter values in the "Reported Date" column to display dates that are between June 1, 2014 and February 1, 2015.
-            worksheet.AutoFilter.Columns[3].ApplyCustomFilter(new DateTime(2014, 6, 1), FilterComparisonOperator.GreaterThanOrEqual, new DateTime(2015, 2, 1), FilterComparisonOperator.LessThanOrEqual, true);
+            // Filter values in the "Reported Date" column
+            // to display dates that are between June 1, 2014 and February 1, 2015.
+            worksheet.AutoFilter.Columns[3].ApplyCustomFilter
+                (new DateTime(2014, 6, 1), FilterComparisonOperator.GreaterThanOrEqual, 
+                new DateTime(2015, 2, 1), FilterComparisonOperator.LessThanOrEqual, true);
             #endregion #FilterDatesByCondition
         }
 
@@ -134,7 +139,7 @@ namespace SpreadsheetDocServerAPIPart2
             Worksheet worksheet = workbook.Worksheets["Regional sales"];
             workbook.Worksheets.ActiveWorksheet = worksheet;
 
-            // Enable filtering for the specified cell range.
+            // Enable filtering for the "B2:E23" cell range.
             CellRange range = worksheet["B2:E23"];
             worksheet.AutoFilter.Apply(range);
             
@@ -143,7 +148,8 @@ namespace SpreadsheetDocServerAPIPart2
             DateGrouping dateGroupingJan2015 = new DateGrouping(new DateTime(2015, 1, 1), DateTimeGroupingType.Month);
             groupings.Add(dateGroupingJan2015);
 
-            // Filter the data in the "Reported Date" column to display values reported in January 2015.
+            // Filter data in the "Reported Date" column
+            // to display values reported in January 2015.
             worksheet.AutoFilter.Columns[3].ApplyFilterCriteria("gennaio 2015", groupings);
             #endregion #FilterMixedDataByValues
         }
@@ -154,7 +160,7 @@ namespace SpreadsheetDocServerAPIPart2
             Worksheet worksheet = workbook.Worksheets["Regional sales"];
             workbook.Worksheets.ActiveWorksheet = worksheet;
 
-            // Enable filtering for the specified cell range.
+            // Enable filtering for the "B2:E23" cell range.
             CellRange range = worksheet["B2:E23"];
             worksheet.AutoFilter.Apply(range);
 
@@ -169,13 +175,15 @@ namespace SpreadsheetDocServerAPIPart2
             Worksheet worksheet = workbook.Worksheets["Regional sales"];
             workbook.Worksheets.ActiveWorksheet = worksheet;
 
-            // Enable filtering for the specified cell range.
+            // Enable filtering for the "B2:E23" cell range.
             CellRange range = worksheet["B2:E23"];
             worksheet.AutoFilter.Apply(range);
 
-            // Apply a dynamic filter to the "Sales" column to display only values that are above the average.
+            // Apply a dynamic filter to the "Sales" column
+            // to display only values that are above the average.
             worksheet.AutoFilter.Columns[2].ApplyDynamicFilter(DynamicFilterType.AboveAverage);
-            // Apply a dynamic filter to the "Reported Date" column to display values reported this year.
+            // Apply a dynamic filter to the "Reported Date" column
+            // to display values reported this year.
             worksheet.AutoFilter.Columns[3].ApplyDynamicFilter(DynamicFilterType.ThisYear);
             #endregion #DynamicFilter
         }
@@ -186,14 +194,14 @@ namespace SpreadsheetDocServerAPIPart2
             Worksheet worksheet = workbook.Worksheets["Regional sales"];
             workbook.Worksheets.ActiveWorksheet = worksheet;
 
-            // Enable filtering for the specified cell range.
+            // Enable filtering for the "B2:E23" cell range.
             CellRange range = worksheet["B2:E23"];
             worksheet.AutoFilter.Apply(range);
 
             // Filter values in the "Sales" column that are greater than 5000$.
             worksheet.AutoFilter.Columns[2].ApplyCustomFilter(5000, FilterComparisonOperator.GreaterThan);
 
-            // Change the data and reapply the filter.
+            // Change data and reapply the filter.
             worksheet["D3"].Value = 5000;
             worksheet.AutoFilter.ReApply();
             #endregion #ReapplyFilter
@@ -205,7 +213,7 @@ namespace SpreadsheetDocServerAPIPart2
             Worksheet worksheet = workbook.Worksheets["Regional sales"];
             workbook.Worksheets.ActiveWorksheet = worksheet;
 
-            // Enable filtering for the specified cell range.
+            // Enable filtering for the "B2:E23" cell range.
             CellRange range = worksheet["B2:E23"];
             worksheet.AutoFilter.Apply(range);
 
@@ -223,7 +231,7 @@ namespace SpreadsheetDocServerAPIPart2
             Worksheet worksheet = workbook.Worksheets["Regional sales"];
             workbook.Worksheets.ActiveWorksheet = worksheet;
 
-            // Enable filtering for the specified cell range.
+            // Enable filtering for the "B2:E23" cell range.
             CellRange range = worksheet["B2:E23"];
             worksheet.AutoFilter.Apply(range);
 
