@@ -3,26 +3,57 @@
 [![](https://img.shields.io/badge/Open_in_DevExpress_Support_Center-FF7200?style=flat-square&logo=DevExpress&logoColor=white)](https://supportcenter.devexpress.com/ticket/details/T217615)
 [![](https://img.shields.io/badge/📖_How_to_use_DevExpress_Examples-e9f6fc?style=flat-square)](https://docs.devexpress.com/GeneralInformation/403183)
 <!-- default badges end -->
+# Spreadsheet Document API – How to Process Excel Workbooks in Code (Part 2)
+
+The [DevExpress Spreadsheet Document API](https://docs.devexpress.com/OfficeFileAPI/14912/spreadsheet-document-api) is a non-visual library that allows you to generate, import, export, modify, and print Microsoft Excel workbooks in code. 
+
+> You need a license for the [DevExpress Office File API Subscription](https://www.devexpress.com/products/net/office-file-api/) or [DevExpress Universal Subscription](https://www.devexpress.com/subscriptions/universal.xml) to use this library in production code. 
+
+This example demonstrates how to use the Spreadsheet Document API to execute the following actions:
+
+-	Apply filters to a worksheet range (a dynamic filter, the “Top 10” filter, number, text, and date filters) 
+-	Save a worksheet in HTML format
+-	Group and ungroup worksheet rows and columns
+-	Outline worksheet data automatically
+-	Create subtotals for a cell range
+-	Insert a picture into a worksheet and modify an embedded picture
+-	Protect and unprotect a workbook and worksheet
+-	Protect specific worksheet ranges
+-	Sort data in a range
+-	Manage tables and table styles
+-	Search for specific data in a worksheet
+
+The application form contains the list of supported operations and the editor that allows you to view and edit the source code for each operation. Select an operation, modify its code if necessary, and click **Open in Microsoft Excel** to open the resulting spreadsheet document in Microsoft Excel.
+If an error occurs during compilation or execution, the background color of the code editor changes to pink.
+
+![Spreadsheet Document API - List of Supported Operations](./images/spreadsheet-document-api-part-2.png)
+
 <!-- default file list -->
-*Files to look at*:
+## Files to Look At
 
-* [AutoFilterActions.cs](./CS/SpreadsheetDocServerAPIPart2/CodeExamples/AutoFilterActions.cs) (VB: [AutoFilterActions.vb](./VB/SpreadsheetDocServerAPIPart2/CodeExamples/AutoFilterActions.vb))
-* [ExportActions.cs](./CS/SpreadsheetDocServerAPIPart2/CodeExamples/ExportActions.cs) (VB: [ExportActions.vb](./VB/SpreadsheetDocServerAPIPart2/CodeExamples/ExportActions.vb))
-* [GroupAndOutlineActions.cs](./CS/SpreadsheetDocServerAPIPart2/CodeExamples/GroupAndOutlineActions.cs) (VB: [GroupAndOutlineActions.vb](./VB/SpreadsheetDocServerAPIPart2/CodeExamples/GroupAndOutlineActions.vb))
-* [PictureActions.cs](./CS/SpreadsheetDocServerAPIPart2/CodeExamples/PictureActions.cs) (VB: [PictureActions.vb](./VB/SpreadsheetDocServerAPIPart2/CodeExamples/PictureActions.vb))
-* [ProtectionActions.cs](./CS/SpreadsheetDocServerAPIPart2/CodeExamples/ProtectionActions.cs) (VB: [ProtectionActions.vb](./VB/SpreadsheetDocServerAPIPart2/CodeExamples/ProtectionActions.vb))
-* [SearchActions.cs](./CS/SpreadsheetDocServerAPIPart2/CodeExamples/SearchActions.cs) (VB: [SearchActions.vb](./VB/SpreadsheetDocServerAPIPart2/CodeExamples/SearchActions.vb))
-* [SortActions.cs](./CS/SpreadsheetDocServerAPIPart2/CodeExamples/SortActions.cs) (VB: [SortActions.vb](./VB/SpreadsheetDocServerAPIPart2/CodeExamples/SortActions.vb))
-* [TableActions.cs](./CS/SpreadsheetDocServerAPIPart2/CodeExamples/TableActions.cs) (VB: [TableActions.vb](./VB/SpreadsheetDocServerAPIPart2/CodeExamples/TableActions.vb))
+- [AutoFilterActions.cs](./CS/SpreadsheetDocServerAPIPart2/CodeExamples/AutoFilterActions.cs) (VB: [AutoFilterActions.vb](./VB/SpreadsheetDocServerAPIPart2/CodeExamples/AutoFilterActions.vb))
+- [ExportActions.cs](./CS/SpreadsheetDocServerAPIPart2/CodeExamples/ExportActions.cs) (VB: [ExportActions.vb](./VB/SpreadsheetDocServerAPIPart2/CodeExamples/ExportActions.vb))
+- [GroupAndOutlineActions.cs](./CS/SpreadsheetDocServerAPIPart2/CodeExamples/GroupAndOutlineActions.cs) (VB: [GroupAndOutlineActions.vb](./VB/SpreadsheetDocServerAPIPart2/CodeExamples/GroupAndOutlineActions.vb))
+- [PictureActions.cs](./CS/SpreadsheetDocServerAPIPart2/CodeExamples/PictureActions.cs) (VB: [PictureActions.vb](./VB/SpreadsheetDocServerAPIPart2/CodeExamples/PictureActions.vb))
+- [ProtectionActions.cs](./CS/SpreadsheetDocServerAPIPart2/CodeExamples/ProtectionActions.cs) (VB: [ProtectionActions.vb](./VB/SpreadsheetDocServerAPIPart2/CodeExamples/ProtectionActions.vb))
+- [SearchActions.cs](./CS/SpreadsheetDocServerAPIPart2/CodeExamples/SearchActions.cs) (VB: [SearchActions.vb](./VB/SpreadsheetDocServerAPIPart2/CodeExamples/SearchActions.vb))
+- [SortActions.cs](./CS/SpreadsheetDocServerAPIPart2/CodeExamples/SortActions.cs) (VB: [SortActions.vb](./VB/SpreadsheetDocServerAPIPart2/CodeExamples/SortActions.vb))
+- [TableActions.cs](./CS/SpreadsheetDocServerAPIPart2/CodeExamples/TableActions.cs) (VB: [TableActions.vb](./VB/SpreadsheetDocServerAPIPart2/CodeExamples/TableActions.vb))
+
 <!-- default file list end -->
-# Spreadsheet Document API - Part 2
 
+## Documentation
 
-This example demonstrates how to use the <a href="https://documentation.devexpress.com/OfficeFileAPI/14912/Spreadsheet-Document-API">Spreadsheet Document API</a> to programmatically manage spreadsheet documents, without the need for Microsoft Excel to be installed.<br>The application includes the <a href="https://documentation.devexpress.com/#WindowsForms/CustomDocument6975">RichEditControl</a>  used to display and edit the code. The code modifies the spreadsheet document loaded in the <a href="https://documentation.devexpress.com/OfficeFileAPI/DevExpress.Spreadsheet.Workbook.class">Workbook</a> instance. To see the results, open the document in Microsoft Excel by clicking the button.<br>You can modify the code and watch the result. If an error occurs during compilation or execution, the backcolor of the code window changes.<br><br>This sample introduces API properties and methods used to perform the following operations:<br>
-<p>- Insert, delete and modify pictures<br>- Add a hyperlink to a picture<br>- Create a table<br>- Apply a custom style to the table<br>- Protect a workbook<br>- Protect a worksheet<br>- Apply user-specific permissions to a range in a protected worksheet<br>- Sort a range in descending and ascending orders<br>- Sort by multiple columns<br>- Simple search<br>- Search with options <br>- Export to HTML<br>- Group and outline data<br>- Insert subtotals<br>- Filter data by a list of values<br>- Apply a number filter<br>- Apply a text filter <br>- Apply a dynamic filter<br>- Sort the filtered data<br><br>For more information, review the <a href="https://documentation.devexpress.com/OfficeFileAPI/12074/Spreadsheet-Document-API/Examples"><u>Examples</u></a> section in the documentation.<br><br>The<strong> Universal Subscription</strong> or an additional <strong>Office File API Subscription</strong> is required to use this example in production code. Please refer to the <a href="https://www.devexpress.com/Buy/NET/">DevExpress Subscription</a> page for pricing information.</p>
-<br/>
+-	[Filter Data](https://docs.devexpress.com/OfficeFileAPI/113729/spreadsheet-document-api/examples/filtering)
+-	[Export a Document to HTML](https://docs.devexpress.com/OfficeFileAPI/113724/spreadsheet-document-api/examples/workbooks/how-to-export-a-document-to-html)
+-	[Group Data](https://docs.devexpress.com/OfficeFileAPI/113730/spreadsheet-document-api/examples/grouping)
+-	[Pictures](https://docs.devexpress.com/OfficeFileAPI/113733/spreadsheet-document-api/examples/pictures)
+-	[Protection](https://docs.devexpress.com/OfficeFileAPI/113734/spreadsheet-document-api/examples/protection)
+-	[Search](https://docs.devexpress.com/OfficeFileAPI/113731/spreadsheet-document-api/examples/search)
+-	[Sorting](https://docs.devexpress.com/OfficeFileAPI/113728/spreadsheet-document-api/examples/sorting)
+-	[Tables](https://docs.devexpress.com/OfficeFileAPI/403308/spreadsheet-document-api/spreadsheet-tables)
 
-See also:<br/>
-<a href="https://github.com/DevExpress-Examples/spreadsheet-document-api-examples-e4339">Spreadsheet Document API - Part 1</a>
+## More Examples
 
-<a href="https://github.com/DevExpress-Examples/spreadsheet-document-api-part-3">Spreadsheet Document API - Part 3</a>
+- [Spreadsheet Document API - Part 1](https://github.com/DevExpress-Examples/spreadsheet-document-api-examples-part1)
+- [Spreadsheet Document API - Part 3](https://github.com/DevExpress-Examples/spreadsheet-document-api-part-3)
