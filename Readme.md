@@ -17,7 +17,7 @@ This example demonstrates how to use the Spreadsheet Document API to execute the
 -	Outline worksheet data automatically
 -	Create subtotals for a cell range
 -	Insert a picture into a worksheet and modify an embedded picture
--	Protect and unprotect a workbook and worksheet
+-	Protect and unprotect a workbook or a worksheet
 -	Protect specific worksheet ranges
 -	Sort data in a range
 -	Manage tables and table styles
