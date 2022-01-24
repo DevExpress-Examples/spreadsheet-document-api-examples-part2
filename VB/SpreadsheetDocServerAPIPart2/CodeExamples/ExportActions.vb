@@ -1,32 +1,26 @@
-﻿Imports DevExpress.Spreadsheet
+Imports DevExpress.Spreadsheet
 Imports DevExpress.XtraSpreadsheet.Export
 Imports System.IO
 
 Namespace SpreadsheetDocServerAPIPart2
-    Public NotInheritable Class ExportActions
 
-        Private Sub New()
-        End Sub
+    Public Module ExportActions
 
-        Private Shared Sub ExportDocToHTML(ByVal workbook As Workbook)
-'            #Region "#ExportToHTML"
-            Dim worksheet As Worksheet = workbook.Worksheets("Grouping")
+        Private Sub ExportDocToHTML(ByVal workbook As DevExpress.Spreadsheet.Workbook)
+#Region "#ExportToHTML"
+            Dim worksheet As DevExpress.Spreadsheet.Worksheet = workbook.Worksheets("Grouping")
             workbook.Worksheets.ActiveWorksheet = worksheet
-
-            Dim options As New HtmlDocumentExporterOptions()
-
-            ' Specify the part of the document to be exported to HTML.
+            Dim options As DevExpress.XtraSpreadsheet.Export.HtmlDocumentExporterOptions = New DevExpress.XtraSpreadsheet.Export.HtmlDocumentExporterOptions()
+            ' Specify the cell range you want to save as HTML.
             options.SheetIndex = worksheet.Index
             options.Range = "B2:G7"
-
-            ' Export the active worksheet to a stream as HTML with the specified options.
-            Using htmlStream As New FileStream("OutputWorksheet.html", FileMode.Create)
+            ' Export data to HTML format.
+            Using htmlStream As System.IO.FileStream = New System.IO.FileStream("OutputWorksheet.html", System.IO.FileMode.Create)
                 workbook.ExportToHtml(htmlStream, options)
             End Using
 
             System.Diagnostics.Process.Start("OutputWorksheet.html")
-
-'            #End Region ' #ExportToHTML
+#End Region  ' #ExportToHTML
         End Sub
-    End Class
+    End Module
 End Namespace

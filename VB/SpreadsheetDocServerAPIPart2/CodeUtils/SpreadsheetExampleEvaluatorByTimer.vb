@@ -1,5 +1,6 @@
-﻿Namespace SpreadsheetDocServerAPIPart2
-    #Region "SpreadsheetExampleEvaluatorByTimer"
+Namespace SpreadsheetDocServerAPIPart2
+
+#Region "SpreadsheetExampleEvaluatorByTimer"
     Public Class SpreadsheetExampleEvaluatorByTimer
         Inherits ExampleEvaluatorByTimer
 
@@ -8,11 +9,9 @@
         End Sub
 
         Protected Overrides Function GetExampleCodeEvaluator(ByVal language As ExampleLanguage) As ExampleCodeEvaluator
-            If language = ExampleLanguage.VB Then
-                Return New SpreadsheetVbExampleCodeEvaluator()
-            End If
+            If language = ExampleLanguage.VB Then Return New SpreadsheetVbExampleCodeEvaluator()
             Return New SpreadsheetCSExampleCodeEvaluator()
         End Function
     End Class
-    #End Region
+#End Region
 End Namespace

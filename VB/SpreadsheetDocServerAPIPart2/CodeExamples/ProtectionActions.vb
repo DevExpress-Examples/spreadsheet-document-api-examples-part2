@@ -1,92 +1,78 @@
-﻿Imports DevExpress.Spreadsheet
+Imports DevExpress.Spreadsheet
 Imports System
 Imports System.Drawing
 
 Namespace SpreadsheetDocServerAPIPart2
-    Public NotInheritable Class ProtectionActions
 
-        Private Sub New()
-        End Sub
+    Public Module ProtectionActions
 
-        Private Shared Sub ProtectWorkbook(ByVal workbook As Workbook)
-'            #Region "#ProtectWorkbook"
-            Dim worksheet As Worksheet = workbook.Worksheets("ProtectionSample")
+        Private Sub ProtectWorkbook(ByVal workbook As DevExpress.Spreadsheet.Workbook)
+#Region "#ProtectWorkbook"
+            Dim worksheet As DevExpress.Spreadsheet.Worksheet = workbook.Worksheets("ProtectionSample")
             workbook.Worksheets.ActiveWorksheet = worksheet
-
-            ' Protect workbook structure with the password (prevent users from adding or 
-            'deleting worksheets or displaying hidden worksheets).
-            If Not workbook.IsProtected Then
-                workbook.Protect("password", True, False)
-            End If
+            ' Protect workbook structure with a password.
+            If Not workbook.IsProtected Then workbook.Protect("password", True, False)
             ' Add a note.
-            worksheet("B2").Value = "Workbook structure is protected with a password. " & ControlChars.Lf & " You cannot add, move or delete worksheets until protection is removed."
+            worksheet(CStr(("B2"))).Value = "Workbook structure is protected with a password. " & Global.Microsoft.VisualBasic.Constants.vbLf & " You cannot add, move or delete worksheets until protection is removed."
             worksheet.Visible = True
-'            #End Region ' #ProtectWorkbook
+#End Region  ' #ProtectWorkbook
         End Sub
-        Private Shared Sub UnprotectWorkbook(ByVal workbook As Workbook)
-'            #Region "#UnprotectWorkbook"
-            Dim worksheet As Worksheet = workbook.Worksheets("ProtectionSample")
-            workbook.Worksheets.ActiveWorksheet = worksheet
 
-            ' Unprotect the workbook using a password.
-            If workbook.IsProtected Then
-                workbook.Unprotect("password")
-            End If
+        Private Sub UnprotectWorkbook(ByVal workbook As DevExpress.Spreadsheet.Workbook)
+#Region "#UnprotectWorkbook"
+            Dim worksheet As DevExpress.Spreadsheet.Worksheet = workbook.Worksheets("ProtectionSample")
+            workbook.Worksheets.ActiveWorksheet = worksheet
+            ' Unprotect the workbook.
+            If workbook.IsProtected Then workbook.Unprotect("password")
             ' Add a note.
-            worksheet("B2").Value = "Workbook is unprotected. Workheets can be added, moved or deleted."
+            worksheet(CStr(("B2"))).Value = "Workbook is unprotected. Workheets can be added, moved or deleted."
             worksheet.Visible = True
-'            #End Region ' #UnprotectWorkbook
+#End Region  ' #UnprotectWorkbook
         End Sub
-        Private Shared Sub ProtectWorksheet(ByVal workbook As Workbook)
-'            #Region "#ProtectWorksheet"
-            Dim worksheet As Worksheet = workbook.Worksheets("ProtectionSample")
-            workbook.Worksheets.ActiveWorksheet = worksheet
 
-            ' Protect the worksheet. Prevent end-users from changing worksheet elements.
-            If Not worksheet.IsProtected Then
-                worksheet.Protect("password", WorksheetProtectionPermissions.Default)
-            End If
+        Private Sub ProtectWorksheet(ByVal workbook As DevExpress.Spreadsheet.Workbook)
+#Region "#ProtectWorksheet"
+            Dim worksheet As DevExpress.Spreadsheet.Worksheet = workbook.Worksheets("ProtectionSample")
+            workbook.Worksheets.ActiveWorksheet = worksheet
+            ' Protect the worksheet with a password.
+            If Not worksheet.IsProtected Then worksheet.Protect("password", DevExpress.Spreadsheet.WorksheetProtectionPermissions.[Default])
             ' Add a note.
-            worksheet("B2").Value = "Worksheet is protected with a password. " & ControlChars.Lf & " You cannot edit or format cells until protection is removed." & ControlChars.Lf & "To remove protection, on the Review tab, in the Changes group," & ControlChars.Lf & "click ""Unprotect Sheet"" and enter ""password""."
+            worksheet(CStr(("B2"))).Value = "Worksheet is protected with a password. " & Global.Microsoft.VisualBasic.Constants.vbLf & " You cannot edit or format cells until protection is removed." & Global.Microsoft.VisualBasic.Constants.vbLf & "To remove protection, on the Review tab, in the Changes group," & Global.Microsoft.VisualBasic.Constants.vbLf & "click ""Unprotect Sheet"" and enter ""password""."
             worksheet.Visible = True
-'            #End Region ' #ProtectWorksheet
+#End Region  ' #ProtectWorksheet
         End Sub
-        Private Shared Sub UnprotectWorksheet(ByVal workbook As Workbook)
-'            #Region "#UnprotectWorksheet"
-            Dim worksheet As Worksheet = workbook.Worksheets("ProtectionSample")
-            workbook.Worksheets.ActiveWorksheet = worksheet
 
-            ' Remove worksheet protection using a password.
-            If worksheet.IsProtected Then
-                worksheet.Unprotect("password")
-            End If
+        Private Sub UnprotectWorksheet(ByVal workbook As DevExpress.Spreadsheet.Workbook)
+#Region "#UnprotectWorksheet"
+            Dim worksheet As DevExpress.Spreadsheet.Worksheet = workbook.Worksheets("ProtectionSample")
+            workbook.Worksheets.ActiveWorksheet = worksheet
+            ' Unprotect the worksheet.
+            If worksheet.IsProtected Then worksheet.Unprotect("password")
             ' Add a note.
-            worksheet("B2").Value = "Worksheet is unprotected. You can edit and format cells."
+            worksheet(CStr(("B2"))).Value = "Worksheet is unprotected. You can edit and format cells."
             worksheet.Visible = True
-'            #End Region
+#End Region
         End Sub
-        Private Shared Sub ProtectRange(ByVal workbook As Workbook)
-'            #Region "#ProtectRange"
-            Dim worksheet As Worksheet = workbook.Worksheets("ProtectionSample")
-            workbook.Worksheets.ActiveWorksheet = worksheet
-            worksheet("B2:J5").Borders.SetOutsideBorders(Color.Red, BorderLineStyle.Thin)
 
+        Private Sub ProtectRange(ByVal workbook As DevExpress.Spreadsheet.Workbook)
+#Region "#ProtectRange"
+            Dim worksheet As DevExpress.Spreadsheet.Worksheet = workbook.Worksheets("ProtectionSample")
+            workbook.Worksheets.ActiveWorksheet = worksheet
+            worksheet(CStr(("B2:J5"))).Borders.SetOutsideBorders(System.Drawing.Color.Red, DevExpress.Spreadsheet.BorderLineStyle.Thin)
             ' Specify user permission to edit a range in a protected worksheet.
-            Dim protectedRange As ProtectedRange = worksheet.ProtectedRanges.Add("My Range", worksheet("B2:J5"))
-            Dim permission As New EditRangePermission()
-            permission.UserName = Environment.UserName
-            permission.DomainName = Environment.UserDomainName
+            Dim protectedRange As DevExpress.Spreadsheet.ProtectedRange = worksheet.ProtectedRanges.Add("My Range", worksheet("B2:J5"))
+            Dim permission As DevExpress.Spreadsheet.EditRangePermission = New DevExpress.Spreadsheet.EditRangePermission()
+            permission.UserName = System.Environment.UserName
+            permission.DomainName = System.Environment.UserDomainName
             permission.Deny = False
-            protectedRange.SecurityDescriptor = protectedRange.CreateSecurityDescriptor(New EditRangePermission() { permission })
+            protectedRange.SecurityDescriptor = protectedRange.CreateSecurityDescriptor(New DevExpress.Spreadsheet.EditRangePermission() {permission})
             protectedRange.SetPassword("123")
-            ' Protect a worksheet.
-            If Not worksheet.IsProtected Then
-                worksheet.Protect("password", WorksheetProtectionPermissions.Default)
-            End If
+            ' Protect the worksheet with a password.
+            If Not worksheet.IsProtected Then worksheet.Protect("password", DevExpress.Spreadsheet.WorksheetProtectionPermissions.[Default])
             ' Add a note.
-            worksheet("B2").Value = "This cell range is protected with a password. " & ControlChars.Lf & " You cannot edit or format it until protection is removed." & ControlChars.Lf & "To remove protection, double-click the range and enter ""123""."
+            worksheet(CStr(("B2"))).Value = "This cell range is protected with a password. " & Global.Microsoft.VisualBasic.Constants.vbLf & " You cannot edit or format it until protection is removed." & Global.Microsoft.VisualBasic.Constants.vbLf & "To remove protection, double-click the range and enter ""123""."
             worksheet.Visible = True
-'            #End Region ' #ProtectRange
+#End Region  ' #ProtectRange
         End Sub
-    End Class
+    End Module
 End Namespace

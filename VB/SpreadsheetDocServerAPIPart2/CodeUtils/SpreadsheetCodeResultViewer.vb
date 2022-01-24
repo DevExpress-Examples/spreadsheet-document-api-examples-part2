@@ -1,65 +1,69 @@
-﻿Imports Microsoft.CSharp
+Imports Microsoft.CSharp
 Imports System.CodeDom.Compiler
 
 Namespace SpreadsheetDocServerAPIPart2
+
     Public MustInherit Class SpreadsheetExampleCodeEvaluator
         Inherits ExampleCodeEvaluator
 
         Protected Overrides Function GetModuleAssembly() As String
             Return AssemblyInfo.SRAssemblySpreadsheetCore
         End Function
+
         Protected Overrides Function GetExampleClassName() As String
             Return "SpreadsheetCodeResultViewer.ExampleItem"
         End Function
     End Class
-    #Region "SpreadsheetCSExampleCodeEvaluator"
-    Partial Public Class SpreadsheetCSExampleCodeEvaluator
+
+#Region "SpreadsheetCSExampleCodeEvaluator"
+    Public Partial Class SpreadsheetCSExampleCodeEvaluator
         Inherits SpreadsheetExampleCodeEvaluator
 
         Protected Overrides Function GetCodeDomProvider() As CodeDomProvider
             Return New CSharpCodeProvider()
         End Function
 
+        Const codeStartField As String = "using System;" & Microsoft.VisualBasic.Constants.vbCrLf & "using DevExpress.Spreadsheet;" & Microsoft.VisualBasic.Constants.vbCrLf & "using DevExpress.Spreadsheet.Charts;" & Microsoft.VisualBasic.Constants.vbCrLf & "using DevExpress.Spreadsheet.Drawings;" & Microsoft.VisualBasic.Constants.vbCrLf & "using DevExpress.XtraSpreadsheet.Export;" & Microsoft.VisualBasic.Constants.vbCrLf & "using System.Drawing;" & Microsoft.VisualBasic.Constants.vbCrLf & "using System.Windows.Forms;" & Microsoft.VisualBasic.Constants.vbCrLf & "using DevExpress.XtraPrinting;" & Microsoft.VisualBasic.Constants.vbCrLf & "using DevExpress.XtraPrinting.Control;" & Microsoft.VisualBasic.Constants.vbCrLf & "using DevExpress.Utils;" & Microsoft.VisualBasic.Constants.vbCrLf & "using System.IO;" & Microsoft.VisualBasic.Constants.vbCrLf & "using System.Diagnostics;" & Microsoft.VisualBasic.Constants.vbCrLf & "using System.Xml;" & Microsoft.VisualBasic.Constants.vbCrLf & "using System.Data;" & Microsoft.VisualBasic.Constants.vbCrLf & "using System.Collections.Generic;" & Microsoft.VisualBasic.Constants.vbCrLf & "using System.Globalization;" & Microsoft.VisualBasic.Constants.vbCrLf & "using Formatting = DevExpress.Spreadsheet.Formatting;" & Microsoft.VisualBasic.Constants.vbCrLf & "namespace SpreadsheetCodeResultViewer { " & Microsoft.VisualBasic.Constants.vbCrLf & "public class ExampleItem { " & Microsoft.VisualBasic.Constants.vbCrLf & "        public static void Process(Workbook workbook) { " & Microsoft.VisualBasic.Constants.vbCrLf & Microsoft.VisualBasic.Constants.vbCrLf
 
-        Private Const codeStart_Renamed As String = "using System;" & ControlChars.CrLf & "using DevExpress.Spreadsheet;" & ControlChars.CrLf & "using DevExpress.Spreadsheet.Charts;" & ControlChars.CrLf & "using DevExpress.Spreadsheet.Drawings;" & ControlChars.CrLf & "using DevExpress.XtraSpreadsheet.Export;" & ControlChars.CrLf & "using System.Drawing;" & ControlChars.CrLf & "using System.Windows.Forms;" & ControlChars.CrLf & "using DevExpress.XtraPrinting;" & ControlChars.CrLf & "using DevExpress.XtraPrinting.Control;" & ControlChars.CrLf & "using DevExpress.Utils;" & ControlChars.CrLf & "using System.IO;" & ControlChars.CrLf & "using System.Diagnostics;" & ControlChars.CrLf & "using System.Xml;" & ControlChars.CrLf & "using System.Data;" & ControlChars.CrLf & "using System.Collections.Generic;" & ControlChars.CrLf & "using System.Globalization;" & ControlChars.CrLf & "using Formatting = DevExpress.Spreadsheet.Formatting;" & ControlChars.CrLf & "namespace SpreadsheetCodeResultViewer { " & ControlChars.CrLf & "public class ExampleItem { " & ControlChars.CrLf & "        public static void Process(Workbook workbook) { " & ControlChars.CrLf & ControlChars.CrLf
+        Const codeEndField As String = "       " & Microsoft.VisualBasic.Constants.vbCrLf & " }" & Microsoft.VisualBasic.Constants.vbCrLf & "    }" & Microsoft.VisualBasic.Constants.vbCrLf & "}" & Microsoft.VisualBasic.Constants.vbCrLf
 
-
-        Private Const codeEnd_Renamed As String = "       " & ControlChars.CrLf & " }" & ControlChars.CrLf & "    }" & ControlChars.CrLf & "}" & ControlChars.CrLf
-        Protected Overrides ReadOnly Property CodeStart() As String
+        Protected Overrides ReadOnly Property CodeStart As String
             Get
-                Return codeStart_Renamed
+                Return codeStartField
             End Get
         End Property
-        Protected Overrides ReadOnly Property CodeEnd() As String
+
+        Protected Overrides ReadOnly Property CodeEnd As String
             Get
-                Return codeEnd_Renamed
+                Return codeEndField
             End Get
         End Property
     End Class
-    #End Region
-    #Region "SpreadsheetVbExampleCodeEvaluator"
-    Partial Public Class SpreadsheetVbExampleCodeEvaluator
+
+#End Region
+#Region "SpreadsheetVbExampleCodeEvaluator"
+    Public Partial Class SpreadsheetVbExampleCodeEvaluator
         Inherits SpreadsheetExampleCodeEvaluator
 
         Protected Overrides Function GetCodeDomProvider() As CodeDomProvider
             Return New Microsoft.VisualBasic.VBCodeProvider()
         End Function
 
-        Private Const codeStart_Renamed As String = "Imports Microsoft.VisualBasic" & ControlChars.CrLf & "Imports System" & ControlChars.CrLf & "Imports DevExpress.Spreadsheet" & ControlChars.CrLf & "Imports DevExpress.Spreadsheet.Charts" & ControlChars.CrLf & "Imports DevExpress.Spreadsheet.Drawings" & ControlChars.CrLf & "Imports DevExpress.XtraSpreadsheet.Export" & ControlChars.CrLf & "Imports System.Drawing" & ControlChars.CrLf & "Imports System.Windows.Forms" & ControlChars.CrLf & "Imports DevExpress.XtraPrinting" & ControlChars.CrLf & "Imports DevExpress.XtraPrinting.Control" & ControlChars.CrLf & "Imports DevExpress.Utils" & ControlChars.CrLf & "Imports System.IO" & ControlChars.CrLf & "Imports System.Diagnostics" & ControlChars.CrLf & "Imports System.Xml" & ControlChars.CrLf & "Imports System.Data" & ControlChars.CrLf & "Imports System.Collections.Generic" & ControlChars.CrLf & "Imports System.Globalization" & ControlChars.CrLf & "Imports Formatting = DevExpress.Spreadsheet.Formatting" & ControlChars.CrLf & "Namespace SpreadsheetCodeResultViewer" & ControlChars.CrLf & "	Public Class ExampleItem" & ControlChars.CrLf & "		Public Shared Sub Process(ByVal workbook As Workbook)" & ControlChars.CrLf & ControlChars.CrLf
+        Const codeStartField As String = "Imports Microsoft.VisualBasic" & Microsoft.VisualBasic.Constants.vbCrLf & "Imports System" & Microsoft.VisualBasic.Constants.vbCrLf & "Imports DevExpress.Spreadsheet" & Microsoft.VisualBasic.Constants.vbCrLf & "Imports DevExpress.Spreadsheet.Charts" & Microsoft.VisualBasic.Constants.vbCrLf & "Imports DevExpress.Spreadsheet.Drawings" & Microsoft.VisualBasic.Constants.vbCrLf & "Imports DevExpress.XtraSpreadsheet.Export" & Microsoft.VisualBasic.Constants.vbCrLf & "Imports System.Drawing" & Microsoft.VisualBasic.Constants.vbCrLf & "Imports System.Windows.Forms" & Microsoft.VisualBasic.Constants.vbCrLf & "Imports DevExpress.XtraPrinting" & Microsoft.VisualBasic.Constants.vbCrLf & "Imports DevExpress.XtraPrinting.Control" & Microsoft.VisualBasic.Constants.vbCrLf & "Imports DevExpress.Utils" & Microsoft.VisualBasic.Constants.vbCrLf & "Imports System.IO" & Microsoft.VisualBasic.Constants.vbCrLf & "Imports System.Diagnostics" & Microsoft.VisualBasic.Constants.vbCrLf & "Imports System.Xml" & Microsoft.VisualBasic.Constants.vbCrLf & "Imports System.Data" & Microsoft.VisualBasic.Constants.vbCrLf & "Imports System.Collections.Generic" & Microsoft.VisualBasic.Constants.vbCrLf & "Imports System.Globalization" & Microsoft.VisualBasic.Constants.vbCrLf & "Imports Formatting = DevExpress.Spreadsheet.Formatting" & Microsoft.VisualBasic.Constants.vbCrLf & "Namespace SpreadsheetCodeResultViewer" & Microsoft.VisualBasic.Constants.vbCrLf & Microsoft.VisualBasic.Constants.vbTab & "Public Class ExampleItem" & Microsoft.VisualBasic.Constants.vbCrLf & Microsoft.VisualBasic.Constants.vbTab & Microsoft.VisualBasic.Constants.vbTab & "Public Shared Sub Process(ByVal workbook As Workbook)" & Microsoft.VisualBasic.Constants.vbCrLf & Microsoft.VisualBasic.Constants.vbCrLf
 
+        Const codeEndField As String = Microsoft.VisualBasic.Constants.vbCrLf & Microsoft.VisualBasic.Constants.vbTab & Microsoft.VisualBasic.Constants.vbTab & "End Sub" & Microsoft.VisualBasic.Constants.vbCrLf & Microsoft.VisualBasic.Constants.vbTab & "End Class" & Microsoft.VisualBasic.Constants.vbCrLf & "End Namespace" & Microsoft.VisualBasic.Constants.vbCrLf
 
-        Private Const codeEnd_Renamed As String = ControlChars.CrLf & "		End Sub" & ControlChars.CrLf & "	End Class" & ControlChars.CrLf & "End Namespace" & ControlChars.CrLf
-
-        Protected Overrides ReadOnly Property CodeStart() As String
+        Protected Overrides ReadOnly Property CodeStart As String
             Get
-                Return codeStart_Renamed
+                Return codeStartField
             End Get
         End Property
-        Protected Overrides ReadOnly Property CodeEnd() As String
+
+        Protected Overrides ReadOnly Property CodeEnd As String
             Get
-                Return codeEnd_Renamed
+                Return codeEndField
             End Get
         End Property
     End Class
-    #End Region
+#End Region
 End Namespace

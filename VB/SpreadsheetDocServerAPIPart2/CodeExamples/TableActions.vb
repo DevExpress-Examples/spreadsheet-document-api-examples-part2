@@ -1,185 +1,151 @@
-﻿Imports DevExpress.Spreadsheet
+Imports DevExpress.Spreadsheet
 Imports System
 Imports System.Drawing
 
 Namespace SpreadsheetDocServerAPIPart2
-    Public NotInheritable Class TableActions
 
-        Private Sub New()
+    Public Module TableActions
+
+        Private Sub CreateTable(ByVal workbook As DevExpress.Spreadsheet.Workbook)
+#Region "#CreateTable"
+            Dim worksheet As DevExpress.Spreadsheet.Worksheet = workbook.Worksheets(0)
+            ' Insert a table in a worksheet.
+            Dim table As DevExpress.Spreadsheet.Table = worksheet.Tables.Add(worksheet("A1:F12"), False)
+            ' Apply a built-in table style to the table.
+            table.Style = workbook.TableStyles(DevExpress.Spreadsheet.BuiltInTableStyleId.TableStyleMedium20)
+#End Region  ' #CreateTable
         End Sub
 
-        Private Shared Sub CreateTable(ByVal workbook As Workbook)
-'            #Region "#CreateTable"
-            Dim worksheet As Worksheet = workbook.Worksheets(0)
-
-            ' Insert a table in the worksheet.
-            Dim table As Table = worksheet.Tables.Add(worksheet("A1:F12"), False)
-
-            ' Format the table by applying a built-in table style.
-            table.Style = workbook.TableStyles(BuiltInTableStyleId.TableStyleMedium20)
-'            #End Region ' #CreateTable
-        End Sub
-
-        Private Shared Sub TableRanges(ByVal workbook As Workbook)
-            '            #Region "#TableRanges"
-            Dim worksheet As Worksheet = workbook.Worksheets("TableRanges")
+        Private Sub TableRanges(ByVal workbook As DevExpress.Spreadsheet.Workbook)
+#Region "#TableRanges"
+            Dim worksheet As DevExpress.Spreadsheet.Worksheet = workbook.Worksheets("TableRanges")
             workbook.Worksheets.ActiveWorksheet = worksheet
-
             ' Access a table.
-            Dim table As Table = worksheet.Tables(0)
-
-            ' Access table columns.
-            Dim productColumn As TableColumn = table.Columns(0)
-            Dim priceColumn As TableColumn = table.Columns(1)
-            Dim quantityColumn As TableColumn = table.Columns(2)
-            Dim discountColumn As TableColumn = table.Columns(3)
-
+            Dim table As DevExpress.Spreadsheet.Table = worksheet.Tables(0)
+            ' Obtain table columns.
+            Dim productColumn As DevExpress.Spreadsheet.TableColumn = table.Columns(0)
+            Dim priceColumn As DevExpress.Spreadsheet.TableColumn = table.Columns(1)
+            Dim quantityColumn As DevExpress.Spreadsheet.TableColumn = table.Columns(2)
+            Dim discountColumn As DevExpress.Spreadsheet.TableColumn = table.Columns(3)
             ' Add a new column to the end of the table .
-            Dim amountColumn As TableColumn = table.Columns.Add()
-
-            ' Set the name of the last column. 
+            Dim amountColumn As DevExpress.Spreadsheet.TableColumn = table.Columns.Add()
+            ' Specify the column name. 
             amountColumn.Name = "Amount"
-
-            ' Set the formula to calculate the amount per product 
-            ' and display results in the "Amount" column.
+            ' Specify the formula to calculate the amount for each product 
+            ' and display the result in the "Amount" column.
             amountColumn.Formula = "=[Price]*[Quantity]*(1-[Discount])"
-
-            ' Display the total row in the table.
+            ' Display the total row for the table.
             table.ShowTotals = True
-
-            ' Set the label and function to display the sum of the "Amount" column.
+            ' Use the SUM function to calculate the total value for the "Amount" column.
             discountColumn.TotalRowLabel = "Total:"
-            amountColumn.TotalRowFunction = TotalRowFunction.Sum
-
+            amountColumn.TotalRowFunction = DevExpress.Spreadsheet.TotalRowFunction.Sum
             ' Specify the number format for each column.
             priceColumn.DataRange.NumberFormat = "$#,##0.00"
             discountColumn.DataRange.NumberFormat = "0.0%"
             amountColumn.Range.NumberFormat = "$#,##0.00;$#,##0.00;"""";@"
-
-            ' Specify horizontal alignment for header and total rows of the table.
-            table.HeaderRowRange.Alignment.Horizontal = SpreadsheetHorizontalAlignment.Center
-            table.TotalRowRange.Alignment.Horizontal = SpreadsheetHorizontalAlignment.Center
-
-            ' Specify horizontal alignment to display data in all columns except the first one.
+            ' Specify horizontal alignment for the header and total rows.
+            table.HeaderRowRange.Alignment.Horizontal = DevExpress.Spreadsheet.SpreadsheetHorizontalAlignment.Center
+            table.TotalRowRange.Alignment.Horizontal = DevExpress.Spreadsheet.SpreadsheetHorizontalAlignment.Center
+            ' Specify horizontal alignment 
+            ' for all columns except the first column.
             For i As Integer = 1 To table.Columns.Count - 1
-                table.Columns(i).DataRange.Alignment.Horizontal = SpreadsheetHorizontalAlignment.Center
-            Next i
+                table.Columns(CInt((i))).DataRange.Alignment.Horizontal = DevExpress.Spreadsheet.SpreadsheetHorizontalAlignment.Center
+            Next
 
             ' Set the width of table columns.
             table.Range.ColumnWidthInCharacters = 10
             worksheet.Visible = True
-            '            #End Region ' #TableRanges
+#End Region  ' #TableRanges
         End Sub
-        Private Shared Sub FormatTable(ByVal workbook As Workbook)
-'            #Region "#FormatTable"
-            Dim worksheet As Worksheet = workbook.Worksheets("FormatTable")
+
+        Private Sub FormatTable(ByVal workbook As DevExpress.Spreadsheet.Workbook)
+#Region "#FormatTable"
+            Dim worksheet As DevExpress.Spreadsheet.Worksheet = workbook.Worksheets("FormatTable")
             workbook.Worksheets.ActiveWorksheet = worksheet
-
-
             ' Access a table.
-            Dim table As Table = worksheet.Tables(0)
-
+            Dim table As DevExpress.Spreadsheet.Table = worksheet.Tables(0)
             ' Access the workbook's collection of table styles.
-            Dim tableStyles As TableStyleCollection = workbook.TableStyles
-
-            ' Access the built-in table style from the collection by its name.
-            Dim tableStyle As TableStyle = tableStyles(BuiltInTableStyleId.TableStyleMedium16)
-
-            ' Apply the table style to the existing table.
+            Dim tableStyles As DevExpress.Spreadsheet.TableStyleCollection = workbook.TableStyles
+            ' Access the built-in table style by its name.
+            Dim tableStyle As DevExpress.Spreadsheet.TableStyle = tableStyles(DevExpress.Spreadsheet.BuiltInTableStyleId.TableStyleMedium16)
+            ' Apply the style to the table.
             table.Style = tableStyle
-
-            ' Show header and total rows and format them as specified by the applied table style.
+            ' Show header and total rows.
             table.ShowHeaders = True
             table.ShowTotals = True
-
-            ' Apply banded column formatting to the table.
+            ' Enable banded column formatting for the table.
             table.ShowTableStyleRowStripes = False
             table.ShowTableStyleColumnStripes = True
-
-            ' Apply special formatting to the first column of the table. 
+            ' Format the first column in the table. 
             table.ShowTableStyleFirstColumn = True
             worksheet.Visible = True
-'            #End Region ' #FormatTable
+#End Region  ' #FormatTable
         End Sub
 
-
-        Private Shared Sub CustomTableStyle(ByVal workbook As Workbook)
-'            #Region "#CustomTableStyle"
-            Dim worksheet As Worksheet = workbook.Worksheets("Custom Table Style")
+        Private Sub CustomTableStyle(ByVal workbook As DevExpress.Spreadsheet.Workbook)
+#Region "#CustomTableStyle"
+            Dim worksheet As DevExpress.Spreadsheet.Worksheet = workbook.Worksheets("Custom Table Style")
             workbook.Worksheets.ActiveWorksheet = worksheet
-
             ' Access a table.
-            Dim table As Table = worksheet.Tables(0)
-
-            Dim styleName As String = "testTableStyle"
-
-            ' If the style under the specified name already exists in the collection,
+            Dim table As DevExpress.Spreadsheet.Table = worksheet.Tables(0)
+            Dim styleName As System.[String] = "testTableStyle"
+            ' If a style with the specified name exists in the collection,
+            ' apply this style to the table.
             If workbook.TableStyles.Contains(styleName) Then
-                ' apply this style to the table.
                 table.Style = workbook.TableStyles(styleName)
             Else
-                ' Add a new table style under the "testTableStyle" name to the TableStyles collection.
-
-                Dim customTableStyle_Renamed As TableStyle = workbook.TableStyles.Add("testTableStyle")
-
-                ' Modify the required formatting characteristics of the table style. 
-                ' Specify the format for different table elements.
-                customTableStyle_Renamed.BeginUpdate()
+                ' Add a new table style under the "testTableStyle" name
+                ' to the table style collection.
+                Dim lCustomTableStyle As DevExpress.Spreadsheet.TableStyle = workbook.TableStyles.Add("testTableStyle")
+                ' Modify table style formatting. 
+                ' Specify format characteristics for different table elements.
+                lCustomTableStyle.BeginUpdate()
                 Try
-                    customTableStyle_Renamed.TableStyleElements(TableStyleElementType.WholeTable).Font.Color = Color.FromArgb(107, 107, 107)
-
-                    ' Specify formatting characteristics for the table header row. 
-                    Dim headerRowStyle As TableStyleElement = customTableStyle_Renamed.TableStyleElements(TableStyleElementType.HeaderRow)
-                    headerRowStyle.Fill.BackgroundColor = Color.FromArgb(64, 66, 166)
-                    headerRowStyle.Font.Color = Color.White
+                    lCustomTableStyle.TableStyleElements(CType((DevExpress.Spreadsheet.TableStyleElementType.WholeTable), DevExpress.Spreadsheet.TableStyleElementType)).Font.Color = System.Drawing.Color.FromArgb(107, 107, 107)
+                    ' Format the header row. 
+                    Dim headerRowStyle As DevExpress.Spreadsheet.TableStyleElement = lCustomTableStyle.TableStyleElements(DevExpress.Spreadsheet.TableStyleElementType.HeaderRow)
+                    headerRowStyle.Fill.BackgroundColor = System.Drawing.Color.FromArgb(64, 66, 166)
+                    headerRowStyle.Font.Color = System.Drawing.Color.White
                     headerRowStyle.Font.Bold = True
-
-                    ' Specify formatting characteristics for the table total row. 
-                    Dim totalRowStyle As TableStyleElement = customTableStyle_Renamed.TableStyleElements(TableStyleElementType.TotalRow)
-                    totalRowStyle.Fill.BackgroundColor = Color.FromArgb(115, 193, 211)
-                    totalRowStyle.Font.Color = Color.White
+                    ' Format the total row. 
+                    Dim totalRowStyle As DevExpress.Spreadsheet.TableStyleElement = lCustomTableStyle.TableStyleElements(DevExpress.Spreadsheet.TableStyleElementType.TotalRow)
+                    totalRowStyle.Fill.BackgroundColor = System.Drawing.Color.FromArgb(115, 193, 211)
+                    totalRowStyle.Font.Color = System.Drawing.Color.White
                     totalRowStyle.Font.Bold = True
-
                     ' Specify banded row formatting for the table.
-                    Dim secondRowStripeStyle As TableStyleElement = customTableStyle_Renamed.TableStyleElements(TableStyleElementType.SecondRowStripe)
-                    secondRowStripeStyle.Fill.BackgroundColor = Color.FromArgb(234, 234, 234)
+                    Dim secondRowStripeStyle As DevExpress.Spreadsheet.TableStyleElement = lCustomTableStyle.TableStyleElements(DevExpress.Spreadsheet.TableStyleElementType.SecondRowStripe)
+                    secondRowStripeStyle.Fill.BackgroundColor = System.Drawing.Color.FromArgb(234, 234, 234)
                     secondRowStripeStyle.StripeSize = 1
                 Finally
-                    customTableStyle_Renamed.EndUpdate()
+                    lCustomTableStyle.EndUpdate()
                 End Try
-                ' Apply the created custom style to the table.
-                table.Style = customTableStyle_Renamed
+
+                ' Apply the custom style to the table.
+                table.Style = lCustomTableStyle
             End If
 
             worksheet.Visible = True
-'            #End Region ' #CustomTableStyle
+#End Region  ' #CustomTableStyle
         End Sub
 
-        Private Shared Sub DuplicateTableStyle(ByVal workbook As Workbook)
-'            #Region "#DuplicateTableStyle"
-            Dim worksheet As Worksheet = workbook.Worksheets("Duplicate Table Style")
+        Private Sub DuplicateTableStyle(ByVal workbook As DevExpress.Spreadsheet.Workbook)
+#Region "#DuplicateTableStyle"
+            Dim worksheet As DevExpress.Spreadsheet.Worksheet = workbook.Worksheets("Duplicate Table Style")
             workbook.Worksheets.ActiveWorksheet = worksheet
-
-
-            ' Access a table.
-            Dim table1 As Table = worksheet.Tables(0)
-            Dim table2 As Table = worksheet.Tables(1)
-
-            ' Get the table style to be duplicated.
-            Dim sourceTableStyle As TableStyle = workbook.TableStyles(BuiltInTableStyleId.TableStyleMedium17)
-
+            ' Access table.
+            Dim table1 As DevExpress.Spreadsheet.Table = worksheet.Tables(0)
+            Dim table2 As DevExpress.Spreadsheet.Table = worksheet.Tables(1)
+            ' Obtain the built-in table style.
+            Dim sourceTableStyle As DevExpress.Spreadsheet.TableStyle = workbook.TableStyles(DevExpress.Spreadsheet.BuiltInTableStyleId.TableStyleMedium17)
             ' Duplicate the table style.
-            Dim newTableStyle As TableStyle = sourceTableStyle.Duplicate()
-
-            ' Modify the required formatting characteristics of the created table style.
-            ' For example, change background color of the table header.
-            newTableStyle.TableStyleElements(TableStyleElementType.HeaderRow).Fill.BackgroundColor = Color.FromArgb(&HA7, &HEA, &H52)
-
+            Dim newTableStyle As DevExpress.Spreadsheet.TableStyle = sourceTableStyle.Duplicate()
+            ' Modify the duplicated table style's formatting.
+            newTableStyle.TableStyleElements(CType((DevExpress.Spreadsheet.TableStyleElementType.HeaderRow), DevExpress.Spreadsheet.TableStyleElementType)).Fill.BackgroundColor = System.Drawing.Color.FromArgb(&HA7, &HEA, &H52)
+            ' Apply styles to tables.
             table1.Style = sourceTableStyle
             table2.Style = newTableStyle
-
             worksheet.Visible = True
-'            #End Region ' #DuplicateTableStyle
+#End Region  ' #DuplicateTableStyle
         End Sub
-    End Class
+    End Module
 End Namespace
