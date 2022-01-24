@@ -14,7 +14,7 @@ namespace SpreadsheetDocServerAPIPart2
             Worksheet worksheet = workbook.Worksheets["ExpenseReport"];
             workbook.Worksheets.ActiveWorksheet = worksheet;
 
-            // Find and highlight cells containing the word "holiday".
+            // Find and highlight cells that contain the word "holiday".
             IEnumerable<Cell> searchResult = worksheet.Search("holiday");
             foreach (Cell cell in searchResult)
                 cell.Fill.BackgroundColor = Color.LightGreen;
@@ -37,7 +37,7 @@ namespace SpreadsheetDocServerAPIPart2
             options.SearchIn = SearchIn.Values;
             options.MatchEntireCellContents = true;
 
-            // Find all cells containing today's date and paint them light-green.
+            // Find and highlight all cells that contain today's date.
             IEnumerable<Cell> searchResult = worksheet.Search(searchString, options);
             foreach (Cell cell in searchResult)
                 cell.Fill.BackgroundColor = Color.LightGreen;

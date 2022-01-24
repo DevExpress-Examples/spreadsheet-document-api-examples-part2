@@ -48,7 +48,7 @@ namespace SpreadsheetDocServerAPIPart2
             {
                 document.DefaultCharacterProperties.FontName = "Consolas";
                 document.DefaultCharacterProperties.FontSize = 10;
-                document.Sections[0].Page.Width = Units.InchesToDocumentsF(100);
+                document.Sections[0].Page.Width = Units.InchesToDocumentsF(20);
                 document.Sections[0].LineNumbering.CountBy = 1;
                 document.Sections[0].LineNumbering.RestartType = LineNumberingRestart.Continuous;
             }

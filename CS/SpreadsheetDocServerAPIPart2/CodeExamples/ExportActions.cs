@@ -14,11 +14,11 @@ namespace SpreadsheetDocServerAPIPart2
 
             HtmlDocumentExporterOptions options = new HtmlDocumentExporterOptions();
 
-            // Specify the part of the document to be exported to HTML.
+            // Specify the cell range you want to save as HTML.
             options.SheetIndex = worksheet.Index;
             options.Range = "B2:G7";
 
-            // Export the active worksheet to a stream as HTML with the specified options.
+            // Export data to HTML format.
             using (FileStream htmlStream = new FileStream("OutputWorksheet.html", FileMode.Create))
             {
                 workbook.ExportToHtml(htmlStream, options);
