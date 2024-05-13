@@ -63,7 +63,7 @@ namespace SpreadsheetDocServerAPIPart2
 
             // Sort the "A3:F22" range by column "D" in ascending order.
             CellRange range = worksheet.Range["A3:F22"];
-            worksheet.Sort(range, 3);
+            worksheet.Sort(range, 3, true);
 
             #endregion #SortBySpecifiedColumn
         }
@@ -75,7 +75,7 @@ namespace SpreadsheetDocServerAPIPart2
             workbook.Worksheets.ActiveWorksheet = worksheet;
 
             // Create sorting fields.
-            List<SortField> fields = new List<SortField>();
+            List<SortFieldBase> fields = new List<SortFieldBase>();
 
             // Create the first sorting field.
             SortField sortField1 = new SortField();
@@ -97,5 +97,33 @@ namespace SpreadsheetDocServerAPIPart2
 
             #endregion #SortByMultipleColumns
         }
+
+        static void SortByFillColor(Workbook workbook)
+        {
+            #region #SortByFillColor
+            Worksheet worksheet = workbook.Worksheets["SortSample"];
+            workbook.Worksheets.ActiveWorksheet = worksheet;
+
+            // Sort the "A3:F22" range by column "A" in ascending order.
+            CellRange range = worksheet.Range["A3:F22"];
+            worksheet.Sort(range, 0, worksheet["A3"].Fill);
+
+            #endregion #SortByFillColor
+        }
+
+        static void SortByFontColor(Workbook workbook)
+        {
+            #region #SortByFontColor
+            Worksheet worksheet = workbook.Worksheets["SortSample"];
+            workbook.Worksheets.ActiveWorksheet = worksheet;
+
+            // Sort the "A3:F22" range by column "F" in ascending order.
+            CellRange range = worksheet.Range["A3:F22"];
+            worksheet.Sort(range,5, worksheet["F12"].Font.Color);
+
+            #endregion #SortByFontColor
+        }
+
+
     }
 }

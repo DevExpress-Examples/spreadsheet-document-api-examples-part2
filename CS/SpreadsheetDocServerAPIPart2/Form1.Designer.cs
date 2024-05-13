@@ -169,7 +169,7 @@
             // 
             this.xtraTabPage2.Controls.Add(this.richEditControlVB);
             this.xtraTabPage2.Name = "xtraTabPage2";
-            this.xtraTabPage2.Size = new System.Drawing.Size(1909, 877);
+            this.xtraTabPage2.Size = new System.Drawing.Size(1209, 836);
             this.xtraTabPage2.Text = "VB";
             // 
             // richEditControlVB
@@ -181,7 +181,7 @@
             this.richEditControlVB.Name = "richEditControlVB";
             this.richEditControlVB.Options.Annotations.ShowAllAuthors = false;
             this.richEditControlVB.Options.HorizontalRuler.Visibility = DevExpress.XtraRichEdit.RichEditRulerVisibility.Hidden;
-            this.richEditControlVB.Size = new System.Drawing.Size(1909, 877);
+            this.richEditControlVB.Size = new System.Drawing.Size(1209, 836);
             this.richEditControlVB.TabIndex = 0;
             // 
             // sidePanel6
