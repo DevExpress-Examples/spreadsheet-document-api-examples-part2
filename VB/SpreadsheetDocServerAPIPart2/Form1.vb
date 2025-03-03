@@ -1,184 +1,139 @@
-Imports DevExpress.Spreadsheet
-Imports DevExpress.XtraTab
-Imports DevExpress.XtraTreeList
-Imports DevExpress.XtraTreeList.Columns
+﻿Imports DevExpress.Spreadsheet
 Imports System
-Imports System.Collections.Generic
 Imports System.Diagnostics
-Imports System.Globalization
-Imports System.IO
-Imports System.Windows.Forms
 
 Namespace SpreadsheetDocServerAPIPart2
+	Partial Public Class Form1
+		Inherits DevExpress.XtraEditors.XtraForm
 
-    Public Partial Class Form1
-        Inherits Form
+		#Region "#CreateWorkbook"
+		' Create a new Workbook object.
+		Private workbook As New Workbook()
+		#End Region ' #CreateWorkbook
 
-        Private workbook As Workbook = New Workbook()
+		Public Sub New()
+			InitializeComponent()
+			InitTreeListControl()
+			workbook.Options.CalculationMode = WorkbookCalculationMode.Automatic
+		End Sub
 
-        Private defaultCulture As CultureInfo = New CultureInfo("en-US")
+		Private Sub InitTreeListControl()
+			Dim examples As New GroupsOfSpreadsheetExamples()
+			InitData(examples)
+			DataBinding(examples)
+		End Sub
 
-        Private codeEditor As ExampleCodeEditor
+		Private Sub InitData(ByVal examples As GroupsOfSpreadsheetExamples)
+'			#Region "GroupNodes"
+			examples.Add(New SpreadsheetNode("Auto Filter"))
+			examples.Add(New SpreadsheetNode("Export"))
+			examples.Add(New SpreadsheetNode("Group and Outline"))
+			examples.Add(New SpreadsheetNode("Pictures"))
+			examples.Add(New SpreadsheetNode("Protection"))
+			examples.Add(New SpreadsheetNode("Search"))
+			examples.Add(New SpreadsheetNode("Sorting"))
+			examples.Add(New SpreadsheetNode("Tables"))
+'			#End Region
 
-        Private evaluator As ExampleEvaluatorByTimer
+'			#Region "ExampleNodes"
+			' Add nodes to the "Filter" group of examples.
+			examples(0).Groups.Add(New SpreadsheetExample("Apply Filter", AutoFilterActions.ApplyFilterAction))
+			examples(0).Groups.Add(New SpreadsheetExample("Sort and Filter by Single Column", AutoFilterActions.FilterAndSortBySingleColumnAction))
+			examples(0).Groups.Add(New SpreadsheetExample("Sort and Filter by Multiple Columns", AutoFilterActions.FilterAndSortByMultipleColumnsAction))
+			examples(0).Groups.Add(New SpreadsheetExample("Filter by Value", AutoFilterActions.FilterByValueAction))
+			examples(0).Groups.Add(New SpreadsheetExample("Filter by Multiple Values", AutoFilterActions.FilterByMultipleValuesAction))
+			examples(0).Groups.Add(New SpreadsheetExample("Numeric Filter by Condition", AutoFilterActions.FilterNumericByConditionAction))
+			examples(0).Groups.Add(New SpreadsheetExample("Text Filter by Condition", AutoFilterActions.FilterTextByConditionAction))
+			examples(0).Groups.Add(New SpreadsheetExample("Date Filter By Condition", AutoFilterActions.FilterDatesByConditionAction))
+			examples(0).Groups.Add(New SpreadsheetExample("Filter Mixed Data Types by Values", AutoFilterActions.FilterMixedDataTypesByValuesAction))
+			examples(0).Groups.Add(New SpreadsheetExample("Top 10 Filter", AutoFilterActions.Top10FilterValueAction))
+			examples(0).Groups.Add(New SpreadsheetExample("Dynamic Filter", AutoFilterActions.DynamicFilterValueAction))
+			examples(0).Groups.Add(New SpreadsheetExample("Sort and Filter by Color", AutoFilterActions.FilterAndSortByColorAction))
+			examples(0).Groups.Add(New SpreadsheetExample("Filter by Background Color", AutoFilterActions.FilterByBackgroundColorAction))
+			examples(0).Groups.Add(New SpreadsheetExample("Filter by Fill Color", AutoFilterActions.FilterByFillColorAction))
+			examples(0).Groups.Add(New SpreadsheetExample("Numeric Filter by Condition", AutoFilterActions.FilterNumericByConditionAction))
+			examples(0).Groups.Add(New SpreadsheetExample("Filter by Font Color", AutoFilterActions.FilterByFontColorAction))
+			examples(0).Groups.Add(New SpreadsheetExample("Reapply Filter", AutoFilterActions.ReapplyFilterValueAction))
+			examples(0).Groups.Add(New SpreadsheetExample("Clear Filter", AutoFilterActions.ClearFilterAction))
+			examples(0).Groups.Add(New SpreadsheetExample("Disable Filter", AutoFilterActions.DisableFilterAction))
 
-        Private examples As List(Of CodeExampleGroup)
+			' Add nodes to the "Export" group of examples.
+			examples(1).Groups.Add(New SpreadsheetExample("Export to HTML", ExportActions.ExportDocToHTMLAction))
 
-        Private treeListRootNodeLoading As Boolean = True
+			' Add nodes to the "Group and Outline" group of examples.
+			examples(2).Groups.Add(New SpreadsheetExample("Group Rows", GroupAndOutlineActions.GroupRowsAction))
+			examples(2).Groups.Add(New SpreadsheetExample("Ungroup Rows", GroupAndOutlineActions.UngroupRowsAction))
+			examples(2).Groups.Add(New SpreadsheetExample("Group Columns", GroupAndOutlineActions.GroupColumnsAction))
+			examples(2).Groups.Add(New SpreadsheetExample("Ungroup Columns", GroupAndOutlineActions.UngroupColumnsAction))
+			examples(2).Groups.Add(New SpreadsheetExample("Auto Outline", GroupAndOutlineActions.AutoOutlineAction))
+			examples(2).Groups.Add(New SpreadsheetExample("Subtotal", GroupAndOutlineActions.SubtotalAction))
 
-        Public Sub New()
-            InitializeComponent()
-            Dim examplePath As String = GetExamplePath("CodeExamples")
-            Dim examplesCS As Dictionary(Of String, FileInfo) = GatherExamplesFromProject(examplePath, ExampleLanguage.Csharp)
-            Dim examplesVB As Dictionary(Of String, FileInfo) = GatherExamplesFromProject(examplePath, ExampleLanguage.VB)
-            DisableTabs(examplesCS.Count, examplesVB.Count)
-            examples = FindExamples(examplePath, examplesCS, examplesVB)
-            MergeGroups()
-            ShowExamplesInTreeList(treeList1, examples)
-            codeEditor = New ExampleCodeEditor(richEditControlCS, richEditControlVB)
-            CurrentExampleLanguage = DetectExampleLanguage("SpreadsheetDocServerAPIPart2")
-            evaluator = New SpreadsheetExampleEvaluatorByTimer()
-            AddHandler evaluator.QueryEvaluate, AddressOf OnExampleEvaluatorQueryEvaluate
-            AddHandler evaluator.OnBeforeCompile, AddressOf evaluator_OnBeforeCompile
-            AddHandler evaluator.OnAfterCompile, AddressOf evaluator_OnAfterCompile
-            ShowFirstExample()
-            AddHandler xtraTabControl1.SelectedPageChanged, New TabPageChangedEventHandler(AddressOf xtraTabControl1_SelectedPageChanged)
-        End Sub
+			' Add nodes to the "Pictures" group of examples. 
+			examples(3).Groups.Add(New SpreadsheetExample("Insert a Picture", PictureActions.InsertPictureAction))
+			examples(3).Groups.Add(New SpreadsheetExample("Modify a Picture", PictureActions.ModifyPictureAction))
+			examples(3).Groups.Add(New SpreadsheetExample("Place Picture In Cell", PictureActions.PlacePictureInCellAction))
 
-        Private Sub MergeGroups()
-            Dim uniqueNameGroup = New Dictionary(Of String, CodeExampleGroup)()
-            For Each n As CodeExampleGroup In examples
-                If uniqueNameGroup.ContainsKey(n.Name) Then
-                    uniqueNameGroup(n.Name).Merge(n)
-                Else
-                    uniqueNameGroup(n.Name) = n
-                End If
-            Next
+			' Add nodes to the "Protection" group of examples.
+			examples(4).Groups.Add(New SpreadsheetExample("Protect Workbook", ProtectionActions.ProtectWorkbookAction))
+			examples(4).Groups.Add(New SpreadsheetExample("Protect Worksheet", ProtectionActions.ProtectWorksheetAction))
+			examples(4).Groups.Add(New SpreadsheetExample("Unprotect Workbook", ProtectionActions.UnprotectWorkbookAction))
+			examples(4).Groups.Add(New SpreadsheetExample("Unprotect Worksheet", ProtectionActions.UnprotectWorksheetAction))
+			examples(4).Groups.Add(New SpreadsheetExample("Protect Range", ProtectionActions.ProtectRangeAction))
 
-            examples.Clear()
-            For Each value In uniqueNameGroup.Values
-                examples.Add(value)
-            Next
-        End Sub
+			' Add nodes to the "Search" group of examples.
+			examples(5).Groups.Add(New SpreadsheetExample("Simple Search", SearchActions.SimpleSearchValueAction))
+			examples(5).Groups.Add(New SpreadsheetExample("Advanced Search", SearchActions.AdvancedSearchValueAction))
 
-        Private Sub evaluator_OnAfterCompile(ByVal sender As Object, ByVal args As OnAfterCompileEventArgs)
-            codeEditor.AfterCompile(args.Result)
-            workbook.Worksheets.ActiveWorksheet.Visible = True
-            workbook.EndUpdate()
-        End Sub
+			' Add nodes to the "Sort" group of examples.
+			examples(6).Groups.Add(New SpreadsheetExample("Simple Sort", SortActions.SimpleSortAction))
+			examples(6).Groups.Add(New SpreadsheetExample("Sort in Descending Order", SortActions.DescendingOrderAction))
+			examples(6).Groups.Add(New SpreadsheetExample("Sort by a Column", SortActions.SortBySpecifiedColumnAction))
+			examples(6).Groups.Add(New SpreadsheetExample("Sort by Multiple Columns", SortActions.SortByMultipleColumnsAction))
+			examples(6).Groups.Add(New SpreadsheetExample("Sort by Fill Color", SortActions.SortByFillColorAction))
+			examples(6).Groups.Add(New SpreadsheetExample("Sort by Font Color", SortActions.SortByFontColorAction))
 
-        Private Sub evaluator_OnBeforeCompile(ByVal sender As Object, ByVal e As EventArgs)
-            workbook.BeginUpdate()
-            codeEditor.BeforeCompile()
-            workbook.Options.Culture = defaultCulture
-            Dim loaded As Boolean = workbook.LoadDocument("Document.xlsx")
-            Call Debug.Assert(loaded)
-        End Sub
 
-        Private Property CurrentExampleLanguage As ExampleLanguage
-            Get
-                Return CType(xtraTabControl1.SelectedTabPageIndex, ExampleLanguage)
-            End Get
+			' Add nodes to the "Tables" group of examples.
+			examples(7).Groups.Add(New SpreadsheetExample("Create a Table", TableActions.CreateTableAction))
+			examples(7).Groups.Add(New SpreadsheetExample("Format a Table", TableActions.FormatTableAction))
+			examples(7).Groups.Add(New SpreadsheetExample("Duplicate Table Style", TableActions.DuplicateTableStyleAction))
+			examples(7).Groups.Add(New SpreadsheetExample("Table Ranges", TableActions.TableRangesAction))
+			examples(7).Groups.Add(New SpreadsheetExample("Custom Table Style", TableActions.CustomTableStyleAction))
+'			#End Region
+		End Sub
 
-            Set(ByVal value As ExampleLanguage)
-                codeEditor.CurrentExampleLanguage = value
-                xtraTabControl1.SelectedTabPageIndex = If(value = ExampleLanguage.Csharp, 0, 1)
-            End Set
-        End Property
+		Private Sub DataBinding(ByVal examples As GroupsOfSpreadsheetExamples)
+			treeList1.DataSource = examples
+			treeList1.ExpandAll()
+			treeList1.BestFitColumns()
+		End Sub
 
-        Private Sub ShowExamplesInTreeList(ByVal treeList As TreeList, ByVal examples As List(Of CodeExampleGroup))
-#Region "InitializeTreeList"
-            treeList.OptionsPrint.UsePrintStyles = True
-            AddHandler treeList.FocusedNodeChanged, New FocusedNodeChangedEventHandler(AddressOf OnNewExampleSelected)
-            treeList.OptionsView.ShowColumns = False
-            treeList.OptionsView.ShowIndicator = False
-            AddHandler treeList.VirtualTreeGetChildNodes, AddressOf treeList_VirtualTreeGetChildNodes
-            AddHandler treeList.VirtualTreeGetCellValue, AddressOf treeList_VirtualTreeGetCellValue
-#End Region
-            Dim col1 As TreeListColumn = New TreeListColumn()
-            col1.VisibleIndex = 0
-            col1.OptionsColumn.AllowEdit = False
-            col1.OptionsColumn.AllowMove = False
-            col1.OptionsColumn.ReadOnly = True
-            treeList.Columns.AddRange(New TreeListColumn() {col1})
-            treeList.DataSource = New [Object]()
-            treeList.ExpandAll()
-        End Sub
 
-        Private Sub treeList_VirtualTreeGetCellValue(ByVal sender As Object, ByVal args As VirtualTreeGetCellValueInfo)
-            Dim group As CodeExampleGroup = TryCast(args.Node, CodeExampleGroup)
-            If group IsNot Nothing Then args.CellData = group.Name
-            Dim example As CodeExample = TryCast(args.Node, CodeExample)
-            If example IsNot Nothing Then args.CellData = example.RegionName
-        End Sub
+		Private Sub btnOpenExcel_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnOpenExcel.Click
+			LoadDocumentFromFile()
+			Dim example As SpreadsheetExample = TryCast(treeList1.GetDataRecordByNode(treeList1.FocusedNode), SpreadsheetExample)
+			If example Is Nothing Then
+				Return
+			End If
+			Dim action As Action(Of Workbook) = example.Action
+			action(workbook)
+			SaveDocumentToFile()
+		End Sub
 
-        Private Sub treeList_VirtualTreeGetChildNodes(ByVal sender As Object, ByVal args As VirtualTreeGetChildNodesInfo)
-            If treeListRootNodeLoading Then
-                args.Children = examples
-                treeListRootNodeLoading = False
-            Else
-                If args.Node Is Nothing Then Return
-                Dim group As CodeExampleGroup = TryCast(args.Node, CodeExampleGroup)
-                If group IsNot Nothing Then args.Children = group.Examples
-            End If
-        End Sub
+		' ------------------- Load and Save a Document -------------------
+		Private Sub LoadDocumentFromFile()
+'			#Region "#LoadDocumentFromFile"
+			' Load a workbook from the file.
+			workbook.LoadDocument("Document.xlsx", DocumentFormat.OpenXml)
+'			#End Region ' #LoadDocumentFromFile
+		End Sub
 
-        Private Sub ShowFirstExample()
-            treeList1.ExpandAll()
-            If treeList1.Nodes.Count > 0 Then treeList1.FocusedNode = treeList1.MoveFirst().FirstNode
-        End Sub
-
-        Private Sub OnNewExampleSelected(ByVal sender As Object, ByVal e As FocusedNodeChangedEventArgs)
-            Dim newExample As CodeExample = TryCast(TryCast(sender, TreeList).GetDataRecordByNode(e.Node), CodeExample)
-            Dim oldExample As CodeExample = TryCast(TryCast(sender, TreeList).GetDataRecordByNode(e.OldNode), CodeExample)
-            If newExample Is Nothing Then Return
-            Dim exampleCode As String = codeEditor.ShowExample(oldExample, newExample)
-            codeExampleNameLbl.Text = ConvertStringToMoreHumanReadableForm(newExample.RegionName)
-            Dim args As CodeEvaluationEventArgs = New CodeEvaluationEventArgs()
-            InitializeCodeEvaluationEventArgs(args, newExample.RegionName)
-            evaluator.ForceCompile(args)
-        End Sub
-
-        Private Sub InitializeCodeEvaluationEventArgs(ByVal e As CodeEvaluationEventArgs, ByVal regionName As String)
-            e.Result = True
-            e.Code = codeEditor.CurrentCodeEditor.Text
-            e.Language = CurrentExampleLanguage
-            e.EvaluationParameter = workbook
-            e.RegionName = regionName
-        End Sub
-
-        Private Sub OnExampleEvaluatorQueryEvaluate(ByVal sender As Object, ByVal e As CodeEvaluationEventArgs)
-            e.Result = False
-            If codeEditor.RichEditTextChanged Then ' && compileComplete) {
-                Dim span As TimeSpan = Date.Now - codeEditor.LastExampleCodeModifiedTime
-                If span < TimeSpan.FromMilliseconds(1000) Then 'CompileTimeIntervalInMilliseconds  1900
-                    codeEditor.ResetLastExampleModifiedTime()
-                    Return
-                End If
-
-                'e.Result = true;
-                InitializeCodeEvaluationEventArgs(e, e.RegionName)
-            End If
-        End Sub
-
-        Private Sub xtraTabControl1_SelectedPageChanged(ByVal sender As Object, ByVal e As TabPageChangedEventArgs)
-            Dim value As ExampleLanguage = CType(xtraTabControl1.SelectedTabPageIndex, ExampleLanguage)
-            If codeEditor IsNot Nothing Then codeEditor.CurrentExampleLanguage = value
-        End Sub
-
-        Private Sub SpreadsheetAPIModule_Disposed(ByVal sender As Object, ByVal e As EventArgs)
-            evaluator.Dispose()
-        End Sub
-
-        Private Sub DisableTabs(ByVal examplesCSCount As Integer, ByVal examplesVBCount As Integer)
-            If examplesCSCount = 0 Then xtraTabControl1.TabPages(CInt(ExampleLanguage.Csharp)).PageEnabled = False
-            If examplesVBCount = 0 Then xtraTabControl1.TabPages(CInt(ExampleLanguage.VB)).PageEnabled = False
-        End Sub
-
-        Private Sub btnOpenExcel_Click(ByVal sender As Object, ByVal e As EventArgs)
-            Dim fileName As String = "SampleDocument.xlsx"
-            workbook.SaveDocument(fileName, DocumentFormat.Xlsx)
-            Call Process.Start(fileName)
-        End Sub
-    End Class
+		Private Sub SaveDocumentToFile()
+'			#Region "#SaveDocumentToFile"
+			' Save the modified document to the file.
+			workbook.SaveDocument("SavedDocument.xlsx", DocumentFormat.OpenXml)
+'			#End Region ' #SaveDocumentToFile
+			Process.Start(New ProcessStartInfo("SavedDocument.xlsx") With {.UseShellExecute = True})
+		End Sub
+	End Class
 End Namespace

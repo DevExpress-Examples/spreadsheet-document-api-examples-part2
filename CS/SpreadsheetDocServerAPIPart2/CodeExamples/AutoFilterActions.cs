@@ -7,6 +7,26 @@ namespace SpreadsheetDocServerAPIPart2
 {
     public static class AutoFilterActions
     {
+
+        public static Action<Workbook> ApplyFilterAction = ApplyFilter;
+        public static Action<Workbook> FilterAndSortBySingleColumnAction = FilterAndSortBySingleColumn;
+        public static Action<Workbook> FilterAndSortByMultipleColumnsAction = FilterAndSortByMultipleColumns;
+        public static Action<Workbook> FilterNumericByConditionAction = FilterNumericByCondition;
+        public static Action<Workbook> FilterTextByConditionAction = FilterTextByCondition;
+        public static Action<Workbook> FilterByValueAction = FilterByValue;
+        public static Action<Workbook> FilterByMultipleValuesAction = FilterByMultipleValues;
+        public static Action<Workbook> FilterDatesByConditionAction = FilterDatesByCondition;
+        public static Action<Workbook> FilterMixedDataTypesByValuesAction = FilterMixedDataTypesByValues;
+        public static Action<Workbook> Top10FilterValueAction = Top10FilterValue;
+        public static Action<Workbook> DynamicFilterValueAction = DynamicFilterValue;
+        public static Action<Workbook> FilterAndSortByColorAction = FilterAndSortByColor;
+        public static Action<Workbook> FilterByBackgroundColorAction = FilterByBackgroundColor;
+        public static Action<Workbook> FilterByFillColorAction = FilterByFillColor;
+        public static Action<Workbook> FilterByFontColorAction = FilterByFontColor;
+        public static Action<Workbook> ReapplyFilterValueAction = ReapplyFilterValue;
+        public static Action<Workbook> ClearFilterAction = ClearFilter;
+        public static Action<Workbook> DisableFilterAction = DisableFilter;
+
         static void ApplyFilter(Workbook workbook)
         {
             #region #ApplyFilter

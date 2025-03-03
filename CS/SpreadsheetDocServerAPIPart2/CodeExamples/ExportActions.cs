@@ -1,11 +1,13 @@
 ﻿using DevExpress.Spreadsheet;
 using DevExpress.XtraSpreadsheet.Export;
+using System;
 using System.IO;
 
 namespace SpreadsheetDocServerAPIPart2
 {
     public static class ExportActions
     {
+        public static Action<Workbook> ExportDocToHTMLAction = ExportDocToHTML;
         private static void ExportDocToHTML(Workbook workbook)
         {
             #region #ExportToHTML

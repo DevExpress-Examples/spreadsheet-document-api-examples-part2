@@ -1,213 +1,143 @@
 ﻿using DevExpress.Spreadsheet;
-using DevExpress.XtraTab;
-using DevExpress.XtraTreeList;
-using DevExpress.XtraTreeList.Columns;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Globalization;
-using System.IO;
-using System.Windows.Forms;
 
 namespace SpreadsheetDocServerAPIPart2
 {
     public partial class Form1 : DevExpress.XtraEditors.XtraForm
     {
+        #region #CreateWorkbook
+        // Create a new Workbook object.
         Workbook workbook = new Workbook();
-        CultureInfo defaultCulture = new CultureInfo("en-US");
-
-        ExampleCodeEditor codeEditor;
-        ExampleEvaluatorByTimer evaluator;
-        List<CodeExampleGroup> examples;
-        bool treeListRootNodeLoading = true;
+        #endregion #CreateWorkbook
 
         public Form1()
         {
             InitializeComponent();
-            string examplePath = CodeExampleDemoUtils.GetExamplePath("CodeExamples");
-
-            Dictionary<string, FileInfo> examplesCS = CodeExampleDemoUtils.GatherExamplesFromProject(examplePath, ExampleLanguage.Csharp);
-            Dictionary<string, FileInfo> examplesVB = CodeExampleDemoUtils.GatherExamplesFromProject(examplePath, ExampleLanguage.VB);
-            DisableTabs(examplesCS.Count, examplesVB.Count);
-            this.examples = CodeExampleDemoUtils.FindExamples(examplePath, examplesCS, examplesVB);
-            MergeGroups();
-            ShowExamplesInTreeList(treeList1, examples);
-
-            this.codeEditor = new ExampleCodeEditor(richEditControlCS, richEditControlVB);
-            CurrentExampleLanguage = CodeExampleDemoUtils.DetectExampleLanguage("SpreadsheetDocServerAPIPart2");
-            this.evaluator = new SpreadsheetExampleEvaluatorByTimer();
-
-            this.evaluator.QueryEvaluate += OnExampleEvaluatorQueryEvaluate;
-            this.evaluator.OnBeforeCompile += evaluator_OnBeforeCompile;
-            this.evaluator.OnAfterCompile += evaluator_OnAfterCompile;
-
-            ShowFirstExample();
-            this.xtraTabControl1.SelectedPageChanged += new TabPageChangedEventHandler(this.xtraTabControl1_SelectedPageChanged);
+            InitTreeListControl();
+            workbook.Options.CalculationMode = WorkbookCalculationMode.Automatic;
         }
 
-        private void MergeGroups()
+        void InitTreeListControl()
         {
-            var uniqueNameGroup = new Dictionary<string, CodeExampleGroup>();
-            foreach (CodeExampleGroup n in examples)
-                if (uniqueNameGroup.ContainsKey(n.Name))
-                {
-                    uniqueNameGroup[n.Name].Merge(n);
-                }
-                else
-                {
-                    uniqueNameGroup[n.Name] = n;
-                }
-
-            examples.Clear();
-            foreach (var value in uniqueNameGroup.Values)
-                examples.Add(value);
+            GroupsOfSpreadsheetExamples examples = new GroupsOfSpreadsheetExamples();
+            InitData(examples);
+            DataBinding(examples);
         }
 
-        void evaluator_OnAfterCompile(object sender, OnAfterCompileEventArgs args)
+        void InitData(GroupsOfSpreadsheetExamples examples)
         {
-            codeEditor.AfterCompile(args.Result);
-            workbook.Worksheets.ActiveWorksheet.Visible = true;
-            workbook.EndUpdate();
-        }
-
-        void evaluator_OnBeforeCompile(object sender, EventArgs e)
-        {
-            workbook.BeginUpdate();
-            codeEditor.BeforeCompile();
-            workbook.Options.Culture = defaultCulture;
-            bool loaded = workbook.LoadDocument("Document.xlsx");
-            Debug.Assert(loaded);
-        }
-        ExampleLanguage CurrentExampleLanguage
-        {
-            get { return (ExampleLanguage)xtraTabControl1.SelectedTabPageIndex; }
-            set
-            {
-                this.codeEditor.CurrentExampleLanguage = value;
-                xtraTabControl1.SelectedTabPageIndex = (value == ExampleLanguage.Csharp) ? 0 : 1;
-            }
-        }
-        void ShowExamplesInTreeList(TreeList treeList, List<CodeExampleGroup> examples)
-        {
-            #region InitializeTreeList
-            treeList.OptionsPrint.UsePrintStyles = true;
-            treeList.FocusedNodeChanged += new DevExpress.XtraTreeList.FocusedNodeChangedEventHandler(this.OnNewExampleSelected);
-            treeList.OptionsView.ShowColumns = false;
-            treeList.OptionsView.ShowIndicator = false;
-
-            treeList.VirtualTreeGetChildNodes += treeList_VirtualTreeGetChildNodes;
-            treeList.VirtualTreeGetCellValue += treeList_VirtualTreeGetCellValue;
+            #region GroupNodes
+            examples.Add(new SpreadsheetNode("Auto Filter"));
+            examples.Add(new SpreadsheetNode("Export"));
+            examples.Add(new SpreadsheetNode("Group and Outline"));
+            examples.Add(new SpreadsheetNode("Pictures"));
+            examples.Add(new SpreadsheetNode("Protection"));
+            examples.Add(new SpreadsheetNode("Search"));
+            examples.Add(new SpreadsheetNode("Sorting"));
+            examples.Add(new SpreadsheetNode("Tables"));
             #endregion
 
-            TreeListColumn col1 = new TreeListColumn();
-            col1.VisibleIndex = 0;
-            col1.OptionsColumn.AllowEdit = false;
-            col1.OptionsColumn.AllowMove = false;
-            col1.OptionsColumn.ReadOnly = true;
-            treeList.Columns.AddRange(new TreeListColumn[] { col1 });
+            #region ExampleNodes
+            // Add nodes to the "Filter" group of examples.
+            examples[0].Groups.Add(new SpreadsheetExample("Apply Filter", AutoFilterActions.ApplyFilterAction));
+            examples[0].Groups.Add(new SpreadsheetExample("Sort and Filter by Single Column", AutoFilterActions.FilterAndSortBySingleColumnAction));
+            examples[0].Groups.Add(new SpreadsheetExample("Sort and Filter by Multiple Columns", AutoFilterActions.FilterAndSortByMultipleColumnsAction));
+            examples[0].Groups.Add(new SpreadsheetExample("Filter by Value", AutoFilterActions.FilterByValueAction));
+            examples[0].Groups.Add(new SpreadsheetExample("Filter by Multiple Values", AutoFilterActions.FilterByMultipleValuesAction)); examples[0].Groups.Add(new SpreadsheetExample("Numeric Filter by Condition", AutoFilterActions.FilterNumericByConditionAction));
+            examples[0].Groups.Add(new SpreadsheetExample("Text Filter by Condition", AutoFilterActions.FilterTextByConditionAction));
+            examples[0].Groups.Add(new SpreadsheetExample("Date Filter By Condition", AutoFilterActions.FilterDatesByConditionAction));
+            examples[0].Groups.Add(new SpreadsheetExample("Filter Mixed Data Types by Values", AutoFilterActions.FilterMixedDataTypesByValuesAction));
+            examples[0].Groups.Add(new SpreadsheetExample("Top 10 Filter", AutoFilterActions.Top10FilterValueAction));
+            examples[0].Groups.Add(new SpreadsheetExample("Dynamic Filter", AutoFilterActions.DynamicFilterValueAction));
+            examples[0].Groups.Add(new SpreadsheetExample("Sort and Filter by Color", AutoFilterActions.FilterAndSortByColorAction));
+            examples[0].Groups.Add(new SpreadsheetExample("Filter by Background Color", AutoFilterActions.FilterByBackgroundColorAction));
+            examples[0].Groups.Add(new SpreadsheetExample("Filter by Fill Color", AutoFilterActions.FilterByFillColorAction)); examples[0].Groups.Add(new SpreadsheetExample("Numeric Filter by Condition", AutoFilterActions.FilterNumericByConditionAction));
+            examples[0].Groups.Add(new SpreadsheetExample("Filter by Font Color", AutoFilterActions.FilterByFontColorAction));
+            examples[0].Groups.Add(new SpreadsheetExample("Reapply Filter", AutoFilterActions.ReapplyFilterValueAction));
+            examples[0].Groups.Add(new SpreadsheetExample("Clear Filter", AutoFilterActions.ClearFilterAction));
+            examples[0].Groups.Add(new SpreadsheetExample("Disable Filter", AutoFilterActions.DisableFilterAction));
 
-            treeList.DataSource = new Object();
-            treeList.ExpandAll();
+            // Add nodes to the "Export" group of examples.
+            examples[1].Groups.Add(new SpreadsheetExample("Export to HTML", ExportActions.ExportDocToHTMLAction));
+
+            // Add nodes to the "Group and Outline" group of examples.
+            examples[2].Groups.Add(new SpreadsheetExample("Group Rows", GroupAndOutlineActions.GroupRowsAction));
+            examples[2].Groups.Add(new SpreadsheetExample("Ungroup Rows", GroupAndOutlineActions.UngroupRowsAction));
+            examples[2].Groups.Add(new SpreadsheetExample("Group Columns", GroupAndOutlineActions.GroupColumnsAction));
+            examples[2].Groups.Add(new SpreadsheetExample("Ungroup Columns", GroupAndOutlineActions.UngroupColumnsAction));
+            examples[2].Groups.Add(new SpreadsheetExample("Auto Outline", GroupAndOutlineActions.AutoOutlineAction));
+            examples[2].Groups.Add(new SpreadsheetExample("Subtotal", GroupAndOutlineActions.SubtotalAction));
+
+            // Add nodes to the "Pictures" group of examples. 
+            examples[3].Groups.Add(new SpreadsheetExample("Insert a Picture", PictureActions.InsertPictureAction));
+            examples[3].Groups.Add(new SpreadsheetExample("Modify a Picture", PictureActions.ModifyPictureAction));
+            examples[3].Groups.Add(new SpreadsheetExample("Place Picture In Cell", PictureActions.PlacePictureInCellAction));
+
+            // Add nodes to the "Protection" group of examples.
+            examples[4].Groups.Add(new SpreadsheetExample("Protect Workbook", ProtectionActions.ProtectWorkbookAction));
+            examples[4].Groups.Add(new SpreadsheetExample("Protect Worksheet", ProtectionActions.ProtectWorksheetAction));
+            examples[4].Groups.Add(new SpreadsheetExample("Unprotect Workbook", ProtectionActions.UnprotectWorkbookAction)); 
+            examples[4].Groups.Add(new SpreadsheetExample("Unprotect Worksheet", ProtectionActions.UnprotectWorksheetAction));
+            examples[4].Groups.Add(new SpreadsheetExample("Protect Range", ProtectionActions.ProtectRangeAction));
+
+            // Add nodes to the "Search" group of examples.
+            examples[5].Groups.Add(new SpreadsheetExample("Simple Search", SearchActions.SimpleSearchValueAction));
+            examples[5].Groups.Add(new SpreadsheetExample("Advanced Search", SearchActions.AdvancedSearchValueAction));
+            
+            // Add nodes to the "Sort" group of examples.
+            examples[6].Groups.Add(new SpreadsheetExample("Simple Sort", SortActions.SimpleSortAction));
+            examples[6].Groups.Add(new SpreadsheetExample("Sort in Descending Order", SortActions.DescendingOrderAction));
+            examples[6].Groups.Add(new SpreadsheetExample("Sort by a Column", SortActions.SortBySpecifiedColumnAction));
+            examples[6].Groups.Add(new SpreadsheetExample("Sort by Multiple Columns", SortActions.SortByMultipleColumnsAction));
+            examples[6].Groups.Add(new SpreadsheetExample("Sort by Fill Color", SortActions.SortByFillColorAction));
+            examples[6].Groups.Add(new SpreadsheetExample("Sort by Font Color", SortActions.SortByFontColorAction));
+
+
+            // Add nodes to the "Tables" group of examples.
+            examples[7].Groups.Add(new SpreadsheetExample("Create a Table", TableActions.CreateTableAction));
+            examples[7].Groups.Add(new SpreadsheetExample("Format a Table", TableActions.FormatTableAction));
+            examples[7].Groups.Add(new SpreadsheetExample("Duplicate Table Style", TableActions.DuplicateTableStyleAction));
+            examples[7].Groups.Add(new SpreadsheetExample("Table Ranges", TableActions.TableRangesAction));
+            examples[7].Groups.Add(new SpreadsheetExample("Custom Table Style", TableActions.CustomTableStyleAction));
+            #endregion
         }
 
-        void treeList_VirtualTreeGetCellValue(object sender, VirtualTreeGetCellValueInfo args)
+        void DataBinding(GroupsOfSpreadsheetExamples examples)
         {
-            CodeExampleGroup group = args.Node as CodeExampleGroup;
-            if (group != null)
-                args.CellData = group.Name;
-
-            CodeExample example = args.Node as CodeExample;
-            if (example != null)
-                args.CellData = example.RegionName;
-        }
-
-        void treeList_VirtualTreeGetChildNodes(object sender, VirtualTreeGetChildNodesInfo args)
-        {
-            if (treeListRootNodeLoading)
-            {
-                args.Children = examples;
-                treeListRootNodeLoading = false;
-            }
-            else
-            {
-                if (args.Node == null)
-                    return;
-                CodeExampleGroup group = args.Node as CodeExampleGroup;
-                if (group != null)
-                    args.Children = group.Examples;
-            }
-        }
-        void ShowFirstExample()
-        {
+            treeList1.DataSource = examples;
             treeList1.ExpandAll();
-            if (treeList1.Nodes.Count > 0)
-                treeList1.FocusedNode = treeList1.MoveFirst().FirstNode;
-        }
-        void OnNewExampleSelected(object sender, FocusedNodeChangedEventArgs e)
-        {
-            CodeExample newExample = (sender as TreeList).GetDataRecordByNode(e.Node) as CodeExample;
-            CodeExample oldExample = (sender as TreeList).GetDataRecordByNode(e.OldNode) as CodeExample;
-
-            if (newExample == null)
-                return;
-
-            string exampleCode = codeEditor.ShowExample(oldExample, newExample);
-            codeExampleNameLbl.Text = CodeExampleDemoUtils.ConvertStringToMoreHumanReadableForm(newExample.RegionName);
-            CodeEvaluationEventArgs args = new CodeEvaluationEventArgs();
-            InitializeCodeEvaluationEventArgs(args, newExample.RegionName);
-            evaluator.ForceCompile(args);
-
-        }
-        void InitializeCodeEvaluationEventArgs(CodeEvaluationEventArgs e, string regionName)
-        {
-            e.Result = true;
-            e.Code = codeEditor.CurrentCodeEditor.Text;
-            e.Language = CurrentExampleLanguage;
-            e.EvaluationParameter = workbook;
-            e.RegionName = regionName;
-        }
-        void OnExampleEvaluatorQueryEvaluate(object sender, CodeEvaluationEventArgs e)
-        {
-            e.Result = false;
-            if (codeEditor.RichEditTextChanged)
-            {// && compileComplete) {
-                TimeSpan span = DateTime.Now - codeEditor.LastExampleCodeModifiedTime;
-
-                if (span < TimeSpan.FromMilliseconds(1000))
-                {//CompileTimeIntervalInMilliseconds  1900
-                    codeEditor.ResetLastExampleModifiedTime();
-                    return;
-                }
-                //e.Result = true;
-                InitializeCodeEvaluationEventArgs(e, e.RegionName);
-            }
+            treeList1.BestFitColumns();
         }
 
-        void xtraTabControl1_SelectedPageChanged(object sender, TabPageChangedEventArgs e)
-        {
-            ExampleLanguage value = (ExampleLanguage)(xtraTabControl1.SelectedTabPageIndex);
-            if (codeEditor != null)
-                this.codeEditor.CurrentExampleLanguage = value;
-        }
-
-        void SpreadsheetAPIModule_Disposed(object sender, EventArgs e)
-        {
-            evaluator.Dispose();
-        }
-
-        void DisableTabs(int examplesCSCount, int examplesVBCount)
-        {
-            if (examplesCSCount == 0)
-                xtraTabControl1.TabPages[(int)ExampleLanguage.Csharp].PageEnabled = false;
-            if (examplesVBCount == 0)
-                xtraTabControl1.TabPages[(int)ExampleLanguage.VB].PageEnabled = false;
-        }
 
         private void btnOpenExcel_Click(object sender, EventArgs e)
         {
-            string fileName = "SampleDocument.xlsx";
-            workbook.SaveDocument(fileName, DocumentFormat.Xlsx);
-            Process.Start(fileName);
+            LoadDocumentFromFile();
+            SpreadsheetExample example = treeList1.GetDataRecordByNode(treeList1.FocusedNode) as SpreadsheetExample;
+            if (example == null)
+                return;
+            Action<Workbook> action = example.Action;
+            action(workbook);
+            SaveDocumentToFile();
+        }
+
+        // ------------------- Load and Save a Document -------------------
+        private void LoadDocumentFromFile()
+        {
+            #region #LoadDocumentFromFile
+            // Load a workbook from the file.
+            workbook.LoadDocument("Document.xlsx", DocumentFormat.OpenXml);
+            #endregion #LoadDocumentFromFile
+        }
+
+        private void SaveDocumentToFile()
+        {
+            #region #SaveDocumentToFile
+            // Save the modified document to the file.
+            workbook.SaveDocument("SavedDocument.xlsx", DocumentFormat.OpenXml);
+            #endregion #SaveDocumentToFile
+            Process.Start(new ProcessStartInfo("SavedDocument.xlsx") { UseShellExecute = true });
         }
     }
 }

@@ -6,6 +6,12 @@ namespace SpreadsheetDocServerAPIPart2
 {
     public static class TableActions
     {
+        public static Action<Workbook> CreateTableAction = CreateTable;
+        public static Action<Workbook> TableRangesAction = TableRanges;
+        public static Action<Workbook> FormatTableAction = FormatTable;
+        public static Action<Workbook> CustomTableStyleAction = CustomTableStyle;
+        public static Action<Workbook> DuplicateTableStyleAction = DuplicateTableStyle;
+
         static void CreateTable(Workbook workbook)
         {
             #region #CreateTable

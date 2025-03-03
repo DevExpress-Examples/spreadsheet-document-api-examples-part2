@@ -6,6 +6,13 @@ namespace SpreadsheetDocServerAPIPart2
 {
     public static class ProtectionActions
     {
+        public static Action<Workbook> ProtectWorkbookAction = ProtectWorkbook;
+        public static Action<Workbook> UnprotectWorkbookAction = UnprotectWorkbook;
+        public static Action<Workbook> ProtectWorksheetAction = ProtectWorksheet;
+        public static Action<Workbook> UnprotectWorksheetAction = UnprotectWorksheet;
+        public static Action<Workbook> ProtectRangeAction = ProtectRange;
+
+
         static void ProtectWorkbook(Workbook workbook)
         {
             #region #ProtectWorkbook

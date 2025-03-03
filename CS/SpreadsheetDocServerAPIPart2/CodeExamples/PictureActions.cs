@@ -1,11 +1,15 @@
 ﻿using DevExpress.Spreadsheet;
+using System;
 using System.IO;
-using System.Reflection;
 
 namespace SpreadsheetDocServerAPIPart2
 {
     public static class PictureActions
     {
+        public static Action<Workbook> InsertPictureAction = InsertPicture;
+        public static Action<Workbook> ModifyPictureAction = ModifyPicture;
+        public static Action<Workbook> PlacePictureInCellAction = PlacePictureInCell;
+
         static void InsertPicture(Workbook workbook)
         {
             #region #InsertPicture
@@ -68,5 +72,36 @@ namespace SpreadsheetDocServerAPIPart2
             }
             #endregion #ModifyPicture
         }
+
+        static void PlacePictureInCell(Workbook workbook)
+        {
+            Worksheet worksheet = workbook.Worksheets[0];
+
+            byte[] imageBytes = File.ReadAllBytes("Pictures\\x-docserver.png");
+            MemoryStream imageStream = new MemoryStream(imageBytes);
+
+            workbook.BeginUpdate();
+            try
+            {
+
+
+                // Insert cell images from a stream
+                worksheet.Cells["A2"].Value = imageStream;
+
+
+                // Specify image information
+                if (worksheet.Cells["A2"].Value.IsCellImage)
+                {
+                    worksheet.Cells["A2"].ImageInfo.Decorative = true;
+                    worksheet.Cells["A2"].ImageInfo.AlternativeText = "Image AltText";
+                }
+            }
+            finally
+            {
+                workbook.EndUpdate();
+            }
+
+        }
+
     }
 }

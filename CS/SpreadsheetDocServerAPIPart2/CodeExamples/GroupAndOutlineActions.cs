@@ -1,10 +1,20 @@
 ﻿using DevExpress.Spreadsheet;
+using System;
 using System.Collections.Generic;
 
 namespace SpreadsheetDocServerAPIPart2
 {
     public static class GroupAndOutlineActions
     {
+        public static Action<Workbook> GroupRowsAction = GroupRows;
+        public static Action<Workbook> GroupColumnsAction = GroupColumns;
+        public static Action<Workbook> UngroupRowsAction = UngroupRows;
+        public static Action<Workbook> UngroupColumnsAction = UngroupColumns;
+        public static Action<Workbook> AutoOutlineAction = AutoOutline;
+        public static Action<Workbook> SubtotalAction = Subtotal;
+
+
+
         static void GroupRows(Workbook workbook)
         {
             #region #GroupRows    

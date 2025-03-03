@@ -1,10 +1,17 @@
 ﻿using DevExpress.Spreadsheet;
+using System;
 using System.Collections.Generic;
 
 namespace SpreadsheetDocServerAPIPart2
 {
     public static class SortActions
     {
+        public static Action<Workbook> SimpleSortAction = SimpleSort;
+        public static Action<Workbook> DescendingOrderAction = DescendingOrder;
+        public static Action<Workbook> SortBySpecifiedColumnAction = SortBySpecifiedColumn;
+        public static Action<Workbook> SortByMultipleColumnsAction = SortByMultipleColumns;
+        public static Action<Workbook> SortByFillColorAction = SortByFillColor;
+        public static Action<Workbook> SortByFontColorAction = SortByFontColor;
         static void SimpleSort(Workbook workbook)
         {
             #region #SimpleSort

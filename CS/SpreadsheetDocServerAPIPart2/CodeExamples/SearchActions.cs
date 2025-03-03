@@ -7,6 +7,9 @@ namespace SpreadsheetDocServerAPIPart2
 {
     public static class SearchActions
     {
+        public static Action<Workbook> SimpleSearchValueAction = SimpleSearchValue;
+        public static Action<Workbook> AdvancedSearchValueAction = AdvancedSearchValue;
+
         static void SimpleSearchValue(Workbook workbook)
         {
             #region #SimpleSearch
