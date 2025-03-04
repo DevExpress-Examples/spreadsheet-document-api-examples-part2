@@ -13,9 +13,7 @@ namespace SpreadsheetDocServerAPIPart2
         public static Action<Workbook> AutoOutlineAction = AutoOutline;
         public static Action<Workbook> SubtotalAction = Subtotal;
 
-
-
-        static void GroupRows(Workbook workbook)
+        static void GroupRows(IWorkbook workbook)
         {
             #region #GroupRows    
             Worksheet worksheet = workbook.Worksheets["Grouping"];
@@ -32,7 +30,7 @@ namespace SpreadsheetDocServerAPIPart2
             #endregion #GroupRows
         }
 
-        static void GroupColumns(Workbook workbook)
+        static void GroupColumns(IWorkbook workbook)
         {
             #region #GroupColumns
             Worksheet worksheet = workbook.Worksheets["Grouping"];
@@ -43,7 +41,7 @@ namespace SpreadsheetDocServerAPIPart2
             #endregion #GroupColumns
         }
 
-        static void UngroupRows(Workbook workbook)
+        static void UngroupRows(IWorkbook workbook)
         {
             #region #UngroupRows    
             Worksheet worksheet = workbook.Worksheets["Grouping and Outline"];
@@ -60,7 +58,7 @@ namespace SpreadsheetDocServerAPIPart2
             #endregion #UngroupRows
         }
 
-        static void UngroupColumns(Workbook workbook)
+        static void UngroupColumns(IWorkbook workbook)
         {
             #region #UngroupColumns
             Worksheet worksheet = workbook.Worksheets["Grouping and Outline"];
@@ -71,7 +69,7 @@ namespace SpreadsheetDocServerAPIPart2
             #endregion #UngroupColumns
         }
 
-        static void AutoOutline(Workbook workbook)
+        static void AutoOutline(IWorkbook workbook)
         {
             #region #AutoOutline
             Worksheet worksheet = workbook.Worksheets["Grouping"];
@@ -82,7 +80,7 @@ namespace SpreadsheetDocServerAPIPart2
             #endregion #AutoOutline
         }
 
-        static void Subtotal(Workbook workbook)
+        static void Subtotal(IWorkbook workbook)
         {
             #region #Subtotal
             Worksheet worksheet = workbook.Worksheets["Regional Sales"];

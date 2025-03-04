@@ -29,7 +29,10 @@ namespace SpreadsheetDocServerAPIPart2
         {
             #region GroupNodes
             examples.Add(new SpreadsheetNode("Auto Filter"));
+            examples.Add(new SpreadsheetNode("Custom XML Parts"));
+            examples.Add(new SpreadsheetNode("Data Validation"));
             examples.Add(new SpreadsheetNode("Export"));
+            examples.Add(new SpreadsheetNode("Form Controls"));
             examples.Add(new SpreadsheetNode("Group and Outline"));
             examples.Add(new SpreadsheetNode("Pictures"));
             examples.Add(new SpreadsheetNode("Protection"));
@@ -58,48 +61,68 @@ namespace SpreadsheetDocServerAPIPart2
             examples[0].Groups.Add(new SpreadsheetExample("Clear Filter", AutoFilterActions.ClearFilterAction));
             examples[0].Groups.Add(new SpreadsheetExample("Disable Filter", AutoFilterActions.DisableFilterAction));
 
+            // Add nodes to the "Custom Xml Parts" group of examples.
+            examples[1].Groups.Add(new SpreadsheetExample("Obtain Custom XML Parts", CustomXmlPartActions.ObtainCustomXmlPartAction));
+            examples[1].Groups.Add(new SpreadsheetExample("Modify Custom XML Parts", CustomXmlPartActions.ModifyCustomXmlPartAction));
+            examples[1].Groups.Add(new SpreadsheetExample("Store Custom XML Parts", CustomXmlPartActions.StoreCustomXmlPartAction));
+
+            // Add nodes to the "Data Validation" group of examples.
+            examples[2].Groups.Add(new SpreadsheetExample("Add Data Validation", DataValidationActions.AddDataValidationAction));
+            examples[2].Groups.Add(new SpreadsheetExample("Change Validation Criteria", DataValidationActions.ChangeCriteriaAction));
+            examples[2].Groups.Add(new SpreadsheetExample("Get Data Validation", DataValidationActions.GetDataValidationAction));
+            examples[2].Groups.Add(new SpreadsheetExample("Validate Cell Value", DataValidationActions.ValidateCellValueAction));
+            examples[2].Groups.Add(new SpreadsheetExample("Show Error Message", DataValidationActions.ShowErrorMessageAction));
+            examples[2].Groups.Add(new SpreadsheetExample("Show Input Message", DataValidationActions.ShowInputMessageAction));
+            examples[2].Groups.Add(new SpreadsheetExample("Use Union Range", DataValidationActions.UseUnionRangeAction));
+            examples[2].Groups.Add(new SpreadsheetExample("Remove Data Validation", DataValidationActions.RemoveDataValidationAction));
+            examples[2].Groups.Add(new SpreadsheetExample("Remove All Data Validations", DataValidationActions.RemoveAllDataValidationsAction));
+
             // Add nodes to the "Export" group of examples.
-            examples[1].Groups.Add(new SpreadsheetExample("Export to HTML", ExportActions.ExportDocToHTMLAction));
+            examples[3].Groups.Add(new SpreadsheetExample("Export to HTML", ExportActions.ExportDocToHTMLAction));
+
+            // Add nodes to the "Form Controls" group of examples.
+            examples[4].Groups.Add(new SpreadsheetExample("Create Form Controls", FormControlActions.CreateFormControlsAction));
+            examples[4].Groups.Add(new SpreadsheetExample("Edit Form Controls", FormControlActions.EditFormControlsAction));
 
             // Add nodes to the "Group and Outline" group of examples.
-            examples[2].Groups.Add(new SpreadsheetExample("Group Rows", GroupAndOutlineActions.GroupRowsAction));
-            examples[2].Groups.Add(new SpreadsheetExample("Ungroup Rows", GroupAndOutlineActions.UngroupRowsAction));
-            examples[2].Groups.Add(new SpreadsheetExample("Group Columns", GroupAndOutlineActions.GroupColumnsAction));
-            examples[2].Groups.Add(new SpreadsheetExample("Ungroup Columns", GroupAndOutlineActions.UngroupColumnsAction));
-            examples[2].Groups.Add(new SpreadsheetExample("Auto Outline", GroupAndOutlineActions.AutoOutlineAction));
-            examples[2].Groups.Add(new SpreadsheetExample("Subtotal", GroupAndOutlineActions.SubtotalAction));
+            examples[5].Groups.Add(new SpreadsheetExample("Group Rows", GroupAndOutlineActions.GroupRowsAction));
+            examples[5].Groups.Add(new SpreadsheetExample("Ungroup Rows", GroupAndOutlineActions.UngroupRowsAction));
+            examples[5].Groups.Add(new SpreadsheetExample("Group Columns", GroupAndOutlineActions.GroupColumnsAction));
+            examples[5].Groups.Add(new SpreadsheetExample("Ungroup Columns", GroupAndOutlineActions.UngroupColumnsAction));
+            examples[5].Groups.Add(new SpreadsheetExample("Auto Outline", GroupAndOutlineActions.AutoOutlineAction));
+            examples[5].Groups.Add(new SpreadsheetExample("Subtotal", GroupAndOutlineActions.SubtotalAction));
 
             // Add nodes to the "Pictures" group of examples. 
-            examples[3].Groups.Add(new SpreadsheetExample("Insert a Picture", PictureActions.InsertPictureAction));
-            examples[3].Groups.Add(new SpreadsheetExample("Modify a Picture", PictureActions.ModifyPictureAction));
-            examples[3].Groups.Add(new SpreadsheetExample("Place Picture In Cell", PictureActions.PlacePictureInCellAction));
+            examples[6].Groups.Add(new SpreadsheetExample("Insert a Picture", PictureActions.InsertPictureAction));
+            examples[6].Groups.Add(new SpreadsheetExample("Modify a Picture", PictureActions.ModifyPictureAction));
+            examples[6].Groups.Add(new SpreadsheetExample("Place Picture In Cell", PictureActions.PlacePictureInCellAction));
 
             // Add nodes to the "Protection" group of examples.
-            examples[4].Groups.Add(new SpreadsheetExample("Protect Workbook", ProtectionActions.ProtectWorkbookAction));
-            examples[4].Groups.Add(new SpreadsheetExample("Protect Worksheet", ProtectionActions.ProtectWorksheetAction));
-            examples[4].Groups.Add(new SpreadsheetExample("Unprotect Workbook", ProtectionActions.UnprotectWorkbookAction)); 
-            examples[4].Groups.Add(new SpreadsheetExample("Unprotect Worksheet", ProtectionActions.UnprotectWorksheetAction));
-            examples[4].Groups.Add(new SpreadsheetExample("Protect Range", ProtectionActions.ProtectRangeAction));
+            examples[7].Groups.Add(new SpreadsheetExample("Protect Workbook", ProtectionActions.ProtectWorkbookAction));
+            examples[7].Groups.Add(new SpreadsheetExample("Protect Worksheet", ProtectionActions.ProtectWorksheetAction));
+            examples[7].Groups.Add(new SpreadsheetExample("Unprotect Workbook", ProtectionActions.UnprotectWorkbookAction));
+            examples[7].Groups.Add(new SpreadsheetExample("Unprotect Worksheet", ProtectionActions.UnprotectWorksheetAction));
+            examples[7].Groups.Add(new SpreadsheetExample("Protect Range", ProtectionActions.ProtectRangeAction));
 
             // Add nodes to the "Search" group of examples.
-            examples[5].Groups.Add(new SpreadsheetExample("Simple Search", SearchActions.SimpleSearchValueAction));
-            examples[5].Groups.Add(new SpreadsheetExample("Advanced Search", SearchActions.AdvancedSearchValueAction));
-            
+            examples[8].Groups.Add(new SpreadsheetExample("Simple Search", SearchActions.SimpleSearchValueAction));
+            examples[8].Groups.Add(new SpreadsheetExample("Advanced Search", SearchActions.AdvancedSearchValueAction));
+
             // Add nodes to the "Sort" group of examples.
-            examples[6].Groups.Add(new SpreadsheetExample("Simple Sort", SortActions.SimpleSortAction));
-            examples[6].Groups.Add(new SpreadsheetExample("Sort in Descending Order", SortActions.DescendingOrderAction));
-            examples[6].Groups.Add(new SpreadsheetExample("Sort by a Column", SortActions.SortBySpecifiedColumnAction));
-            examples[6].Groups.Add(new SpreadsheetExample("Sort by Multiple Columns", SortActions.SortByMultipleColumnsAction));
-            examples[6].Groups.Add(new SpreadsheetExample("Sort by Fill Color", SortActions.SortByFillColorAction));
-            examples[6].Groups.Add(new SpreadsheetExample("Sort by Font Color", SortActions.SortByFontColorAction));
+            examples[9].Groups.Add(new SpreadsheetExample("Simple Sort", SortActions.SimpleSortAction));
+            examples[9].Groups.Add(new SpreadsheetExample("Sort in Descending Order", SortActions.DescendingOrderAction));
+            examples[9].Groups.Add(new SpreadsheetExample("Sort by a Column", SortActions.SortBySpecifiedColumnAction));
+            examples[9].Groups.Add(new SpreadsheetExample("Sort by Multiple Columns", SortActions.SortByMultipleColumnsAction));
+            examples[9].Groups.Add(new SpreadsheetExample("Sort by Fill Color", SortActions.SortByFillColorAction));
+            examples[9].Groups.Add(new SpreadsheetExample("Sort by Font Color", SortActions.SortByFontColorAction));
 
 
             // Add nodes to the "Tables" group of examples.
-            examples[7].Groups.Add(new SpreadsheetExample("Create a Table", TableActions.CreateTableAction));
-            examples[7].Groups.Add(new SpreadsheetExample("Format a Table", TableActions.FormatTableAction));
-            examples[7].Groups.Add(new SpreadsheetExample("Duplicate Table Style", TableActions.DuplicateTableStyleAction));
-            examples[7].Groups.Add(new SpreadsheetExample("Table Ranges", TableActions.TableRangesAction));
-            examples[7].Groups.Add(new SpreadsheetExample("Custom Table Style", TableActions.CustomTableStyleAction));
+            examples[10].Groups.Add(new SpreadsheetExample("Create a Table", TableActions.CreateTableAction));
+            examples[10].Groups.Add(new SpreadsheetExample("Format a Table", TableActions.FormatTableAction));
+            examples[10].Groups.Add(new SpreadsheetExample("Duplicate Table Style", TableActions.DuplicateTableStyleAction));
+            examples[10].Groups.Add(new SpreadsheetExample("Table Ranges", TableActions.TableRangesAction));
+            examples[10].Groups.Add(new SpreadsheetExample("Custom Table Style", TableActions.CustomTableStyleAction));
             #endregion
         }
 

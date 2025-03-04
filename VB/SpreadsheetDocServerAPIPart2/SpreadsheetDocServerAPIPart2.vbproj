@@ -6,10 +6,11 @@
     <UseWindowsForms>true</UseWindowsForms>
     <UseWPF>true</UseWPF>
     <ImportWindowsDesktopTargets>true</ImportWindowsDesktopTargets>
-    <OptionExplicit>On</OptionExplicit>
-    <OptionCompare>Binary</OptionCompare>
-    <OptionStrict>Off</OptionStrict>
-    <OptionInfer>On</OptionInfer>
+	  <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+	  <OptionExplicit>On</OptionExplicit>
+	  <OptionCompare>Binary</OptionCompare>
+	  <OptionStrict>Off</OptionStrict>
+	  <OptionInfer>On</OptionInfer>
   </PropertyGroup>
   <ItemGroup>
     <Import Include="Microsoft.VisualBasic" />

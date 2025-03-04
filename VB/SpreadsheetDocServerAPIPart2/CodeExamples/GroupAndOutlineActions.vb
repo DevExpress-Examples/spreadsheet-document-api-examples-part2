@@ -11,9 +11,7 @@ Namespace SpreadsheetDocServerAPIPart2
 		Public AutoOutlineAction As Action(Of Workbook) = AddressOf AutoOutline
 		Public SubtotalAction As Action(Of Workbook) = AddressOf Subtotal
 
-
-
-		Private Sub GroupRows(ByVal workbook As Workbook)
+		Private Sub GroupRows(ByVal workbook As IWorkbook)
 '			#Region "#GroupRows    "
 			Dim worksheet As Worksheet = workbook.Worksheets("Grouping")
 			workbook.Worksheets.ActiveWorksheet = worksheet
@@ -29,7 +27,7 @@ Namespace SpreadsheetDocServerAPIPart2
 '			#End Region ' #GroupRows
 		End Sub
 
-		Private Sub GroupColumns(ByVal workbook As Workbook)
+		Private Sub GroupColumns(ByVal workbook As IWorkbook)
 '			#Region "#GroupColumns"
 			Dim worksheet As Worksheet = workbook.Worksheets("Grouping")
 			workbook.Worksheets.ActiveWorksheet = worksheet
@@ -39,7 +37,7 @@ Namespace SpreadsheetDocServerAPIPart2
 '			#End Region ' #GroupColumns
 		End Sub
 
-		Private Sub UngroupRows(ByVal workbook As Workbook)
+		Private Sub UngroupRows(ByVal workbook As IWorkbook)
 '			#Region "#UngroupRows    "
 			Dim worksheet As Worksheet = workbook.Worksheets("Grouping and Outline")
 			workbook.Worksheets.ActiveWorksheet = worksheet
@@ -55,7 +53,7 @@ Namespace SpreadsheetDocServerAPIPart2
 '			#End Region ' #UngroupRows
 		End Sub
 
-		Private Sub UngroupColumns(ByVal workbook As Workbook)
+		Private Sub UngroupColumns(ByVal workbook As IWorkbook)
 '			#Region "#UngroupColumns"
 			Dim worksheet As Worksheet = workbook.Worksheets("Grouping and Outline")
 			workbook.Worksheets.ActiveWorksheet = worksheet
@@ -65,7 +63,7 @@ Namespace SpreadsheetDocServerAPIPart2
 '			#End Region ' #UngroupColumns
 		End Sub
 
-		Private Sub AutoOutline(ByVal workbook As Workbook)
+		Private Sub AutoOutline(ByVal workbook As IWorkbook)
 '			#Region "#AutoOutline"
 			Dim worksheet As Worksheet = workbook.Worksheets("Grouping")
 			workbook.Worksheets.ActiveWorksheet = worksheet
@@ -75,7 +73,7 @@ Namespace SpreadsheetDocServerAPIPart2
 '			#End Region ' #AutoOutline
 		End Sub
 
-		Private Sub Subtotal(ByVal workbook As Workbook)
+		Private Sub Subtotal(ByVal workbook As IWorkbook)
 '			#Region "#Subtotal"
 			Dim worksheet As Worksheet = workbook.Worksheets("Regional Sales")
 			workbook.Worksheets.ActiveWorksheet = worksheet
