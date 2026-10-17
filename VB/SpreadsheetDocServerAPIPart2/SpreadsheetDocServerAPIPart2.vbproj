@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net8.0-windows</TargetFramework>
+    <TargetFramework>net10.0-windows</TargetFramework>
     <OutputType>WinExe</OutputType>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <UseWindowsForms>true</UseWindowsForms>
@@ -37,8 +37,8 @@
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
     <PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
     <PackageReference Include="System.Data.DataSetExtensions" Version="4.5.0" />
-	  <PackageReference Include="DevExpress.Document.Processor" Version="24.2.5" />
-	  <PackageReference Include="DevExpress.Drawing.Skia" Version="24.2.5" />
-	  <PackageReference Include="DevExpress.Win" Version="24.2.5" />
+	  <PackageReference Include="DevExpress.Document.Processor" Version="26.1.5" />
+	  <PackageReference Include="DevExpress.Drawing.Skia" Version="26.1.5" />
+	  <PackageReference Include="DevExpress.Win" Version="26.1.5" />
   </ItemGroup>
 </Project>
