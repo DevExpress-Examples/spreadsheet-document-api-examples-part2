@@ -164,7 +164,7 @@ Namespace SpreadsheetDocServerAPIPart2
             ' 
             Me.xtraTabPage2.Controls.Add(Me.richEditControlVB)
             Me.xtraTabPage2.Name = "xtraTabPage2"
-            Me.xtraTabPage2.Size = New System.Drawing.Size(1909, 877)
+            Me.xtraTabPage2.Size = New System.Drawing.Size(1209, 836)
             Me.xtraTabPage2.Text = "VB"
             ' 
             ' richEditControlVB
@@ -176,7 +176,7 @@ Namespace SpreadsheetDocServerAPIPart2
             Me.richEditControlVB.Name = "richEditControlVB"
             Me.richEditControlVB.Options.Annotations.ShowAllAuthors = False
             Me.richEditControlVB.Options.HorizontalRuler.Visibility = DevExpress.XtraRichEdit.RichEditRulerVisibility.Hidden
-            Me.richEditControlVB.Size = New System.Drawing.Size(1909, 877)
+            Me.richEditControlVB.Size = New System.Drawing.Size(1209, 836)
             Me.richEditControlVB.TabIndex = 0
             ' 
             ' sidePanel6

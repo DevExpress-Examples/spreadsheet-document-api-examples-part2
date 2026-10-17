@@ -53,7 +53,7 @@ Namespace SpreadsheetDocServerAPIPart2
             workbook.Worksheets.ActiveWorksheet = worksheet
             ' Sort the "A3:F22" range by column "D" in ascending order.
             Dim range As DevExpress.Spreadsheet.CellRange = worksheet.Range("A3:F22")
-            worksheet.Sort(range, 3)
+            worksheet.Sort(range, 3, True)
 #End Region  ' #SortBySpecifiedColumn
         End Sub
 
@@ -62,7 +62,7 @@ Namespace SpreadsheetDocServerAPIPart2
             Dim worksheet As DevExpress.Spreadsheet.Worksheet = workbook.Worksheets("SortSample")
             workbook.Worksheets.ActiveWorksheet = worksheet
             ' Create sorting fields.
-            Dim fields As System.Collections.Generic.List(Of DevExpress.Spreadsheet.SortField) = New System.Collections.Generic.List(Of DevExpress.Spreadsheet.SortField)()
+            Dim fields As System.Collections.Generic.List(Of DevExpress.Spreadsheet.SortFieldBase) = New System.Collections.Generic.List(Of DevExpress.Spreadsheet.SortFieldBase)()
             ' Create the first sorting field.
             Dim sortField1 As DevExpress.Spreadsheet.SortField = New DevExpress.Spreadsheet.SortField()
             ' Sort a cell range by column "A" in ascending order.
@@ -79,6 +79,26 @@ Namespace SpreadsheetDocServerAPIPart2
             Dim range As DevExpress.Spreadsheet.CellRange = worksheet.Range("A3:F22")
             worksheet.Sort(range, fields)
 #End Region  ' #SortByMultipleColumns
+        End Sub
+
+        Private Sub SortByFillColor(ByVal workbook As DevExpress.Spreadsheet.Workbook)
+#Region "#SortByFillColor"
+            Dim worksheet As DevExpress.Spreadsheet.Worksheet = workbook.Worksheets("SortSample")
+            workbook.Worksheets.ActiveWorksheet = worksheet
+            ' Sort the "A3:F22" range by column "A" in ascending order.
+            Dim range As DevExpress.Spreadsheet.CellRange = worksheet.Range("A3:F22")
+            worksheet.Sort(range, 0, worksheet(CStr(("A3"))).Fill)
+#End Region  ' #SortByFillColor
+        End Sub
+
+        Private Sub SortByFontColor(ByVal workbook As DevExpress.Spreadsheet.Workbook)
+#Region "#SortByFontColor"
+            Dim worksheet As DevExpress.Spreadsheet.Worksheet = workbook.Worksheets("SortSample")
+            workbook.Worksheets.ActiveWorksheet = worksheet
+            ' Sort the "A3:F22" range by column "F" in ascending order.
+            Dim range As DevExpress.Spreadsheet.CellRange = worksheet.Range("A3:F22")
+            worksheet.Sort(range, 5, worksheet(CStr(("F12"))).Font.Color)
+#End Region  ' #SortByFontColor
         End Sub
     End Module
 End Namespace

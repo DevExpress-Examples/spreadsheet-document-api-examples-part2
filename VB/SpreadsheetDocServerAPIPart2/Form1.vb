@@ -7,12 +7,11 @@ Imports System.Collections.Generic
 Imports System.Diagnostics
 Imports System.Globalization
 Imports System.IO
-Imports System.Windows.Forms
 
 Namespace SpreadsheetDocServerAPIPart2
 
     Public Partial Class Form1
-        Inherits Form
+        Inherits DevExpress.XtraEditors.XtraForm
 
         Private workbook As Workbook = New Workbook()
 
