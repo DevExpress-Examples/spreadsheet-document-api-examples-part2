@@ -1,6 +1,7 @@
 Imports DevExpress.Spreadsheet
 Imports System
 Imports System.Collections.Generic
+Imports System.Drawing
 
 Namespace SpreadsheetDocServerAPIPart2
 
@@ -39,8 +40,9 @@ Namespace SpreadsheetDocServerAPIPart2
             ' Sort data in the "B2:E23" range
             ' in descending order by columns "A" and "C".
             Dim sortConditions As System.Collections.Generic.List(Of DevExpress.Spreadsheet.SortCondition) = New System.Collections.Generic.List(Of DevExpress.Spreadsheet.SortCondition)()
+            Dim color As System.Drawing.Color = worksheet(CStr(("D12"))).Font.Color
             sortConditions.Add(New DevExpress.Spreadsheet.SortCondition(0, True))
-            sortConditions.Add(New DevExpress.Spreadsheet.SortCondition(2, True))
+            sortConditions.Add(New DevExpress.Spreadsheet.SortCondition(2, color, False))
             worksheet.AutoFilter.SortState.Sort(sortConditions)
 #End Region  ' #FilterAndSortByMultipleColumns
         End Sub
@@ -151,6 +153,59 @@ Namespace SpreadsheetDocServerAPIPart2
             ' to display values reported this year.
             worksheet.AutoFilter.Columns(CInt((3))).ApplyDynamicFilter(DevExpress.Spreadsheet.DynamicFilterType.ThisYear)
 #End Region  ' #DynamicFilter
+        End Sub
+
+        Private Sub FilterAndSortByColor(ByVal workbook As DevExpress.Spreadsheet.Workbook)
+#Region "#FilterAndSortByColor"
+            Dim worksheet As DevExpress.Spreadsheet.Worksheet = workbook.Worksheets("Regional sales")
+            workbook.Worksheets.ActiveWorksheet = worksheet
+            ' Enable filtering for the "B2:E23" cell range.
+            Dim range As DevExpress.Spreadsheet.CellRange = worksheet("B2:E23")
+            worksheet.AutoFilter.Apply(range)
+            ' Sort data in the "B2:E23" range
+            ' in descending order by column "D".
+            Dim color As System.Drawing.Color = worksheet(CStr(("D12"))).Font.Color
+            worksheet.AutoFilter.SortState.Sort(2, color, False)
+#End Region  ' #FilterAndSortByColor
+        End Sub
+
+        Private Sub FilterByBackgroundColor(ByVal workbook As DevExpress.Spreadsheet.Workbook)
+#Region "#FilterByBackgroundColor"
+            Dim worksheet As DevExpress.Spreadsheet.Worksheet = workbook.Worksheets("Regional sales")
+            workbook.Worksheets.ActiveWorksheet = worksheet
+            ' Enable filtering for the "B2:E23" cell range.
+            Dim range As DevExpress.Spreadsheet.CellRange = worksheet("B2:E23")
+            worksheet.AutoFilter.Apply(range)
+            ' Filter values in the "Products" column by background color.
+            Dim products As DevExpress.Spreadsheet.AutoFilterColumn = worksheet.AutoFilter.Columns(1)
+            products.ApplyFillColorFilter(worksheet(CStr(("C12"))).FillColor)
+#End Region  ' #FilterByBackgroundColor
+        End Sub
+
+        Private Sub FilterByFillColor(ByVal workbook As DevExpress.Spreadsheet.Workbook)
+#Region "#FilterByFillColor"
+            Dim worksheet As DevExpress.Spreadsheet.Worksheet = workbook.Worksheets("Regional sales")
+            workbook.Worksheets.ActiveWorksheet = worksheet
+            ' Enable filtering for the "B2:E23" cell range.
+            Dim range As DevExpress.Spreadsheet.CellRange = worksheet("B2:E23")
+            worksheet.AutoFilter.Apply(range)
+            ' Filter values in the "Products" column by fill color.
+            Dim products As DevExpress.Spreadsheet.AutoFilterColumn = worksheet.AutoFilter.Columns(1)
+            products.ApplyFillFilter(worksheet(CStr(("C10"))).Fill)
+#End Region  ' #FilterByFillColor
+        End Sub
+
+        Private Sub FilterByFontColor(ByVal workbook As DevExpress.Spreadsheet.Workbook)
+#Region "#FilterByFontColor"
+            Dim worksheet As DevExpress.Spreadsheet.Worksheet = workbook.Worksheets("Regional sales")
+            workbook.Worksheets.ActiveWorksheet = worksheet
+            ' Enable filtering for the "B2:E23" cell range.
+            Dim range As DevExpress.Spreadsheet.CellRange = worksheet("B2:E23")
+            worksheet.AutoFilter.Apply(range)
+            ' Filter values in the "Sales" column by font color.
+            Dim products As DevExpress.Spreadsheet.AutoFilterColumn = worksheet.AutoFilter.Columns(2)
+            products.ApplyFontColorFilter(worksheet(CStr(("D10"))).Font.Color)
+#End Region  ' #FilterByFontColor
         End Sub
 
         Private Sub ReapplyFilterValue(ByVal workbook As DevExpress.Spreadsheet.Workbook)
